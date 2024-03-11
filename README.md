@@ -1,16 +1,15 @@
-### Hi there 👋
+# Xellanix Foundation
+## Organization
+Xellanix Foundation (2022) is an independent public benefit community with the purpose to provide a complete, free and open source projects and libraries. This community was formed by [Donny Andrian](@donnyandrian) as a part of implementation for several programming languages such as C++, C#, JavaScript, and others. We are also established to have a positive impact on many people, especially programmers, in utilizing a programming language for their projects.
 
-<!--
-**xellanix/xellanix** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Xellanix continues to strive for relevance in its active projects and libraries, aiming to provide ongoing convenient and positive feedback regarding our development.
 
-Here are some ideas to get you started:
+## Goals
+Our Vision is to provide convenience to everyone in working on their projects in specific programming languages for free.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+As part of our vision, the Xellanix Foundation was formed with mission to offer relevant and user-friendly projects and libraries for free.
+
+The Community’s goals are:
+
+- Maintain and enhance Xellanix projects and libraries through a publicly accessible source code system under the MIT License.
+- Provide researchers and programmers, both individuals and teams, access to complete, free and open source projects and libraries.
