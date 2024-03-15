@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xellanix Foundation</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="media-styles.css"
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+</head>
+<body class="light-theme">
+    <header>
+        <div class="icon-landscape">
+            <img src="assets/icon.svg" alt="">
+            <div>Xellanix</div>
+        </div>
+        <nav>
+            <div class="nav-item-wrapper active"><a href="">Home</a></div>
+            <div class="nav-item-wrapper"><a href="">Feature</a></div>
+            <div class="nav-item-wrapper"><a href="">About</a></div>
+            <div class="nav-item-wrapper"><a href="">Contact</a></div>
+            <div class="nav-item-wrapper"><a href="">Support</a></div>
+        </nav>
+        <div class="hamburger-button">
+            <lottie-player id="hamburger-button-lottie" src="assets/hamburger.json" style="width: 24px; height: 24px;" disableShadowDOM></lottie-player>
+        </div>
+    </header>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script>
+        LottieInteractivity.create({
+            player: '#hamburger-button-lottie',
+            mode: 'cursor',
+            actions: [{type: "toggle"}]
+        });
+    </script>
+</body>
+</html>
