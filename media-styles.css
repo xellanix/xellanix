@@ -1,6 +1,6 @@
-@media (min-width: 1281px) {
+@media (min-width: 1601px) {
     body {
-        --content-padding-horizontal: 160px;
+        --content-max-width: 1400px;
         --icon-gap: 16px;
         --icon-height: 48px;
         --icon-text-size: 36px;
@@ -13,16 +13,16 @@
     }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1600px) {
     body {
-        --content-padding-horizontal: 128px;
+        --content-max-width: 1150px;
         --navigation-text-size: 16px;
     }
 }
 
-@media (max-width: 1048px) {
+@media (max-width: 1400px) {
     body {
-        --content-padding-horizontal: 84px;
+        --content-max-width: 950px;
         --icon-height: 42px;
         --icon-text-size: 32px;
         --navigation-root-padding-vertical: 24px;
@@ -33,18 +33,18 @@
     }
 }
 
-@media (max-width: 848px) {
+@media (max-width: 1100px) {
     body {
-        --content-padding-horizontal: 48px;
+        --content-max-width: 700px;
         --icon-gap: 12px;
         --navigation-root-padding-vertical: 20px;
         --navigation-gap: 16px;
     }
 }
 
-@media (max-width: 744px) {
+@media (max-width: 800px) {
     body {
-        --content-padding-horizontal: 32px;
+        --content-max-width: 600px;
         --icon-gap: 8px;
         --icon-height: 36px;
         --icon-text-size: 28px;
@@ -53,9 +53,18 @@
         --navigation-padding-horizontal: 12px;
         --navigation-padding-vertical: 8px;
     }
+
+    nav {
+        display: none;
+    }
+
+    .hamburger-button {
+        display: flex;
+        align-self: center;
+    }
 }
 
-@media (max-width: 632px) {
+@media (max-width: 700px) {
     body {
         --icon-gap: 8px;
         --icon-height: 32px;
@@ -64,12 +73,7 @@
         --navigation-root-padding-vertical: 16px;
     }
 
-    nav {
-        display: none;
-    }
-
-    .hamburger-button {
-        display: inline-flex;
-        align-self: center;
+    body > .body-wrapper {
+        padding: 0px 48px;
     }
 }

@@ -1,0 +1,30 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-self: stretch;
+    flex: 1 1 0;
+    padding: var(--navigation-root-padding-vertical) 0px;
+}
+
+.icon-landscape {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--icon-gap);
+    align-self: stretch;
+    flex: 1 1 0;
+}
+.icon-landscape > img {
+    height: var(--icon-height);
+}
+.icon-landscape > div {
+    font-size: var(--icon-text-size);
+    font-weight: var(--icon-text-weight);
+}
+
+.hamburger-button {
+    display: none;
+}
+.hamburger-button .hambar path {
+    fill: var(--text-color);
+}
