@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xellanix Foundation</title>
 
+    <link rel="stylesheet" href="main-frame.css" />
+    <link rel="stylesheet" href="header-section.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="nav-styles.css" />
     <link rel="stylesheet" href="media-styles.css"
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
@@ -19,22 +22,37 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
 </head>
 <body class="light-theme">
-    <header>
-        <div class="icon-landscape">
-            <img src="assets/icon.svg" alt="">
-            <div>Xellanix</div>
-        </div>
-        <nav>
-            <div class="nav-item-wrapper active"><a href="">Home</a></div>
-            <div class="nav-item-wrapper"><a href="">Feature</a></div>
-            <div class="nav-item-wrapper"><a href="">About</a></div>
-            <div class="nav-item-wrapper"><a href="">Contact</a></div>
-            <div class="nav-item-wrapper"><a href="">Support</a></div>
-        </nav>
-        <div class="hamburger-button">
-            <lottie-player id="hamburger-button-lottie" src="assets/hamburger.json" style="width: 24px; height: 24px;" disableShadowDOM></lottie-player>
-        </div>
-    </header>
+    <div class="body-wrapper">
+        <header>
+            <div class="icon-landscape">
+                <img src="assets/icon.svg" alt="Xellanix Icon">
+                <div>Xellanix</div>
+            </div>
+            <nav>
+                <div class="nav-item-wrapper active"><a href="">Home</a></div>
+                <div class="nav-item-wrapper"><a href="">Feature</a></div>
+                <div class="nav-item-wrapper"><a href="">About</a></div>
+                <div class="nav-item-wrapper"><a href="">Contact</a></div>
+                <div class="nav-item-wrapper"><a href="">Support</a></div>
+            </nav>
+            <div class="hamburger-button">
+                <lottie-player id="hamburger-button-lottie" src="assets/hamburger.json" style="width: 24px; height: 24px;" disableShadowDOM></lottie-player>
+            </div>
+        </header>
+        
+        <main>
+            <section class="horizontal-layout use-space-between">
+                <div id="hero-content">
+                    <h1>Provide <span style="color: var(--accent-color);">Speed, Simplicity, and Neatness</span> in Your Coding Experience</h1>
+                    <h6>Build your programming projects faster and easier than ever.</h6>
+                    <div class="accent-button">
+                        <a href="">Get Started</a>
+                    </div>
+                </div>
+                <img src="assets/home-1.png" alt="Fast, Simple, and Neat Coding Package Illustration">
+            </section>
+        </main>
+    </div>
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script>
