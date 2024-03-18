@@ -107,7 +107,6 @@
 
     #hero-content {
         max-width: 100%;
-
     }
     #hero-content > img {
         display: initial;
@@ -134,5 +133,11 @@
 
     body > .body-wrapper {
         padding: 0px 48px;
+    }
+
+    #hero-content > img {
+        display: initial;
+        height: 273.67488px;
+        margin-left: 89px;
     }
 }
