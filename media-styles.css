@@ -10,6 +10,9 @@
         --navigation-text-size: 16px;
         --navigation-padding-horizontal: 16px;
         --navigation-padding-vertical: 12px;
+        --h1-font-size: 48px;
+        --h6-font-size: 32px;
+        --accent-button-font-size: 24px;
     }
 }
 
@@ -17,6 +20,14 @@
     body {
         --content-max-width: 1150px;
         --navigation-text-size: 16px;
+        
+        --h1-font-size: 42px;
+        --h6-font-size: 28px;
+        --accent-button-font-size: 20px;
+    }
+
+    #hero-content + img {
+        height: 427.617px;
     }
 }
 
@@ -30,15 +41,46 @@
         --navigation-text-size: 16px;
         --navigation-padding-horizontal: 14px;
         --navigation-padding-vertical: 10px;
+
+        --h1-font-size: 36px;
+        --h6-font-size: 24px;
+        --accent-button-font-size: 16px;
+    }
+
+    #hero-content {
+        gap: 20px;
+    }
+    #hero-content > div {
+        margin-top: 28px;
+    }
+    #hero-content + img {
+        height: 380.104px;
     }
 }
 
 @media (max-width: 1100px) {
     body {
-        --content-max-width: 700px;
+        --content-max-width: 740px;
         --icon-gap: 12px;
         --navigation-root-padding-vertical: 20px;
         --navigation-gap: 16px;
+
+        --h1-font-size: 28px;
+        --h6-font-size: 20px;
+    }
+
+    #hero-content {
+        gap: 16px;
+    }
+    #hero-content > div {
+        margin-top: 24px;
+    }
+    #hero-content + img {
+        height: 342.0936px;
+    }
+    #hero-content > .accent-button {
+        padding: 16px 24px;
+        border-radius: 12px;
     }
 }
 
@@ -61,6 +103,23 @@
     .hamburger-button {
         display: flex;
         align-self: center;
+    }
+
+    #hero-content {
+        max-width: 100%;
+
+    }
+    #hero-content > img {
+        display: initial;
+        height: 342.0936px;
+        margin-left: 112.5px;
+    }
+    #hero-content > div {
+        align-self: center;
+        margin-top: 0px;
+    }
+    #hero-content + img {
+        display: none;
     }
 }
 

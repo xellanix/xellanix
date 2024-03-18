@@ -49,6 +49,9 @@ body {
     --navigation-text-size: 20px;
     --navigation-padding-horizontal: 16px;
     --navigation-padding-vertical: 12px;
+    --h1-font-size: 48px;
+    --h6-font-size: 32px;
+    --accent-button-font-size: 24px;
 
     --color-theme-duration: .333s;
     

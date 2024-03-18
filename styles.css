@@ -1,3 +1,9 @@
+main {
+    display: flex;
+    gap: 128px;
+    flex-direction: column;
+}
+
 section {
     display: flex;
 }
@@ -12,15 +18,19 @@ section.use-space-between {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: var(--h1-font-size);
     font-weight: 600;
     margin: 0px;
 }
 
 h6 {
-    font-size: 32px;
+    font-size: var(--h6-font-size);
     font-weight: 500;
     margin: 0px;
+}
+
+img {
+    object-fit: contain;
 }
 
 .accent-button {
@@ -29,8 +39,8 @@ h6 {
     background-color: var(--accent-color);
     color: #E6E6E6;
     border-radius: 16px;
-    padding: 24px 36px;
-    font-size: 32px;
+    padding: 20px 28px;
+    font-size: var(--accent-button-font-size);
     font-weight: 600;
 
     transition: background-color 87ms ease-out;
@@ -54,6 +64,14 @@ h6 {
 #hero-content > div {
     margin-top: 40px;
 }
+#hero-content > img {
+    display: none;
+}
 #hero-content + img {
     height: 475.13px;
 }
+
+#more-about-xellanix {
+    text-align: center;
+}
+
