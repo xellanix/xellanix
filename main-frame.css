@@ -39,7 +39,7 @@ html {
 
 body {
     --content-max-width: 1400px;
-    --content-gap: 128px;
+    --content-gap: 160px;
     --icon-gap: 16px;
     --icon-height: 48px;
     --icon-text-size: 36px;

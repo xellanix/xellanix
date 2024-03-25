@@ -137,7 +137,8 @@
 
     #hero-content > img {
         display: initial;
-        height: 273.67488px;
-        margin-left: 89px;
+        width: 55%;
+        height: initial;
+        margin-left: 31.25%;
     }
 }

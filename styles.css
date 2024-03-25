@@ -1,6 +1,6 @@
 main {
     display: flex;
-    gap: 128px;
+    gap: var(--content-gap);
     flex-direction: column;
 }
 
