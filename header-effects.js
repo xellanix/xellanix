@@ -7,12 +7,24 @@ function stickHeader() {
 }
 stickHeader();
 
+$('nav').ready(function(e) {
+    $('nav').empty();
+
+    // Maximum item can be shown currently only 5
+    $('main > section[data-insert-to-navbar-menu]').each(function() {
+        const id = substringTo($(this).attr('id'), '-section');
+        const itemName = toCapitalizeEachWord(id, '-');
+    
+        $('nav').append(`<div class="nav-item-wrapper ${id}-section-class"><a href="#${id}-section">${itemName}</a></div>`);
+    });
+});
+
 function changeSelectedNavItem() {
     function getLastVisibleSection() {
         let lastVisibleSection = null;
         let lastVisibleSectionTop = 0;
 
-        $("section[id$=-section]").each(function() {
+        $("main > section[data-insert-to-navbar-menu]").each(function() {
             const section = this;
 
             const rect = section.getBoundingClientRect();
@@ -27,7 +39,7 @@ function changeSelectedNavItem() {
         return lastVisibleSection;
     }
 
-    $(window).on('scroll', function() {
+    function setStyleToNavBarItem() {
         const lastVisibleSection = getLastVisibleSection();
         
         if (lastVisibleSection) {
@@ -35,7 +47,10 @@ function changeSelectedNavItem() {
             $(`.nav-item-wrapper`).removeClass('active');
             $(`.nav-item-wrapper.${id}-class`).addClass('active');
         }
-    })
+    }
+
+    $(window).ready(setStyleToNavBarItem);
+    $(window).on('scroll', setStyleToNavBarItem);
 }
 changeSelectedNavItem();
 
@@ -49,4 +64,4 @@ $('.nav-item-wrapper > a').on('click', function() {
     if ($('#navigation-small-hamburger').css('display') !== 'none') {
         $('#hamburger-button-lottie #animation').click();
     }
-})
+});
