@@ -56,6 +56,12 @@ body {
     --accent-button-font-size: 24px;
 
     --color-theme-duration: .333s;
+
+    --section-gap-horizontal: 64px;
+    --section-gap-vertical: 24px;
+
+    --action-button-font-size: 24px;
+
     
     font-family: 'Figtree', sans-serif;
     font-weight: 400;
