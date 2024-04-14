@@ -88,3 +88,38 @@ img {
     text-align: center;
     gap: 24px;
 }
+#purpose-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr)
+}
+.purpose-goals {
+    width: 400px;
+    height: 100px;
+}
+#products{
+    gap: calc(var(--section-gap-vertical) * 2);
+    text-align: center;
+    position: relative;
+    --margin-manipulate: -400px;
+    --margin-top-manipulate: -450px;
+    margin-block: var(--margin-manipulate);
+    padding-block: calc(var(--margin-manipulate) * -1);
+    margin-top: var(--margin-top-manipulate);
+    padding-top: calc(var(--margin-top-manipulate) * -1);
+    scroll-margin-top: calc(calc(var(--margin-top-manipulate)/ 1.5)+ var(--content-gap));
+}
+#products > img{
+    position: absolute;
+    z-index: -100;
+    top: 640 px;
+    bottom: 29.5%;
+    margin: auto 0;
+    height: 104.5%;
+}
+#products > div.horizontal-layout{
+    row-gap: var(--section-gap-horizontal)
+}
+.download-button {
+background-color: var(--accent-color);
+color: white;
+}

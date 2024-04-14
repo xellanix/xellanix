@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    overflow-x: clip;
 }
 
 .light-theme {
@@ -51,11 +52,21 @@ body {
     --navigation-padding-vertical: 12px;
     --h1-font-size: 48px;
     --h2-font-size: 36px;
+    --h3-font-size: 28px;
+    --h4-font-size: 24px;
     --h6-font-size: 32px;
     --p-font-size: 16px;
+    --section-gap-vertical: 24px;
+    --section-gap-horizontal: 64px;
     --accent-button-font-size: 24px;
 
     --color-theme-duration: .333s;
+
+    --section-gap-horizontal: 64px;
+    --section-gap-vertical: 24px;
+
+    --action-button-font-size: 24px;
+
     
     font-family: 'Figtree', sans-serif;
     font-weight: 400;
@@ -72,6 +83,7 @@ body {
 
     background-color: var(--primary-background-color);
     color: var(--text-color);
+    overflow-x: clip;
 }
 
 body > .body-wrapper {
@@ -80,7 +92,7 @@ body > .body-wrapper {
     flex: 1 1 0;
     flex-direction: column;
     gap: var(--content-gap);
-    margin-bottom: var(--navigation-root-padding-vertical);
+    margin-bottom: calc(var(--navigation-root-padding-vertical) * 2);
 }
 
 .no-scroll {
