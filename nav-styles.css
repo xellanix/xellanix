@@ -26,3 +26,7 @@ nav > .nav-item-wrapper {
 nav > .nav-item-wrapper.active {
     border-bottom: 3px solid var(--accent-color);
 }
+
+.nav-item-wrapper > .nav-item-indicator {
+    display: none;
+}
