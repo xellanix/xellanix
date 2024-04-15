@@ -102,7 +102,9 @@ img {
 #hero-content + img {
     height: 475.13px;
 }
-
+*[data-insert-to-navbar-menu] {
+    scroll-margin-top: var(--content-gap);
+}
 #home-section {
     margin-top: calc(var(--content-gap) * -1);
     padding-top: var(--content-gap);
