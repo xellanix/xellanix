@@ -183,3 +183,6 @@ img {
     column-gap: calc(var(--section-gap-horizontal) * 1.5);
     row-gap: calc(var(--section-gap-vertical) * 2);
 }
+.social-media-links {
+    column-gap: var(--section-gap);
+}
