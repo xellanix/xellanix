@@ -7,15 +7,6 @@ main {
 section {
     display: flex;
 }
-section.horizontal-layout {
-    flex-direction: row;
-}
-section.vertical-layout {
-    flex-direction: column;
-}
-section.use-space-between {
-    justify-content: space-between;
-}
 
 h1 {
     font-size: var(--h1-font-size);
@@ -27,10 +18,25 @@ h2 {
     font-weight: 700;
     margin: 0px;
 }
+h3 {
+    font-size: var(--h3-font-size);
+    font-weight: 700;
+    margin: 0px;
+}
+h4 {
+    font-size: var(--h4-font-size);
+    font-weight: 700;
+    margin: 0px;
+}
 h6 {
     font-size: var(--h6-font-size);
     font-weight: 500;
     margin: 0px;
+}
+p > br {
+    display: block;
+    content: "";
+    margin-top: 0.5em;
 }
 p {
     font-size: var(--p-font-size);
@@ -63,6 +69,23 @@ img {
     text-decoration: none !important;
 }
 
+.product-item{
+    display: flex;
+    flex-direction: column;
+    width: 275px;
+    align-items: center;
+    border: 2px solid var(--accent-color);
+    padding: 32px 16px;
+    gap: 16px;
+    border-radius: 16px;
+}
+.product-item > .accent-button {
+    align-self: center;
+    font-size: calc(var(--accent-button-font-size) * 5);
+    padding: 16px 24px;
+    border-radius: 12px;
+    margin-top: 16px;
+}
 #hero-content {
     display: flex;
     flex-direction: column;
@@ -86,17 +109,14 @@ img {
 }
 #more-about-xellanix {
     text-align: center;
-    gap: 24px;
+    column-gap: var(--section-gap-horizontal);
+    row-gap: calc(var(--section-gap-vertical) * 2);
 }
-#purpose-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr)
+#more-about-xelanix > * {
+    min-width: 275px;
 }
-.purpose-goals {
-    width: 400px;
-    height: 100px;
-}
-#products{
+
+#products-section{
     gap: calc(var(--section-gap-vertical) * 2);
     text-align: center;
     position: relative;
@@ -108,7 +128,7 @@ img {
     padding-top: calc(var(--margin-top-manipulate) * -1);
     scroll-margin-top: calc(calc(var(--margin-top-manipulate)/ 1.5)+ var(--content-gap));
 }
-#products > img{
+#products-section > img{
     position: absolute;
     z-index: -100;
     top: 640 px;
@@ -116,10 +136,6 @@ img {
     margin: auto 0;
     height: 104.5%;
 }
-#products > div.horizontal-layout{
+#products-section > div.horizontal-layout{
     row-gap: var(--section-gap-horizontal)
-}
-.download-button {
-background-color: var(--accent-color);
-color: white;
 }
