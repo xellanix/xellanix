@@ -107,8 +107,10 @@
         height: 342.0936px;
     }
     #hero-content > .accent-button {
-        padding: 16px 24px;
         border-radius: 12px;
+    }
+    #hero-content > .accent-button > a {
+        padding: 16px 24px;
     }
 
     .product-item {
@@ -116,9 +118,11 @@
         padding: 28px 14px;
     }
     .product-item > .accent-button {
-        padding: 14px 20px;
         border-radius: 8px;
         margin-top: 14px;
+    }
+    .product-item > .accent-button > a {
+        padding: 14px 20px;
     }
 }
 
