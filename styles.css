@@ -54,7 +54,6 @@ img {
     background-color: var(--accent-color);
     color: #E6E6E6;
     border-radius: 16px;
-    padding: 20px 28px;
     font-size: var(--accent-button-font-size);
     font-weight: 600;
 
@@ -67,6 +66,7 @@ img {
 .accent-button > a {
     color: #E6E6E6;
     text-decoration: none !important;
+    padding: 20px 28px;
 }
 
 .product-item {
@@ -74,25 +74,33 @@ img {
     flex-direction: column;
     width: 275px;
     align-items: center;
-    border: 2px solid var(--accent-color);
+    
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 5%);
     padding: 32px 16px;
     gap: 16px;
     border-radius: 16px;
+    background-color: var(--primary-background-color);
+    transition: box-shadow 133ms ease-out;
+}
+.product-item:hover {
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 15%);
 }
 .product-item > .accent-button {
     align-self: center;
-    font-size: calc(var(--accent-button-font-size) * 5);
-    padding: 16px 24px;
+    font-size: calc(var(--accent-button-font-size) * 5 / 6);
     border-radius: 12px;
     margin-top: 16px;
 }
+.product-item > .accent-button > a {
+    padding: 16px 24px;
+}
+
 .team-member-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 225px;
     gap: calc(var(--section-gap-vertical) * 4 / 3);
-
 }
 .team-member-item > img {
     width: 225px;
@@ -103,6 +111,7 @@ img {
 .team-member-item > div {
     gap: 8px;
 }
+
 #hero-content {
     display: flex;
     flex-direction: column;
@@ -119,6 +128,7 @@ img {
 #hero-content + img {
     height: 475.13px;
 }
+
 *[data-insert-to-navbar-menu] {
     scroll-margin-top: var(--content-gap);
 }
@@ -135,12 +145,15 @@ img {
 #products-section {
     gap: calc(var(--section-gap-vertical) * 2);
     position: relative;
+    
     --margin-manipulate: -400px;
     --margin-top-manipulate: -450px;
+
     margin-block: var(--margin-manipulate);
     padding-block: calc(var(--margin-manipulate) * -1);
     margin-top: var(--margin-top-manipulate);
     padding-top: calc(var(--margin-top-manipulate) * -1);
+
     scroll-margin-top: calc(calc(var(--margin-top-manipulate) / 1.5) + var(--content-gap));
 }
 #products-section > img {
@@ -179,6 +192,7 @@ img {
     column-gap: calc(var(--section-gap-horizontal) * 1.5);
     row-gap: calc(var(--section-gap-vertical) * 2);
 }
+
 .social-media-links {
     column-gap: var(--section-gap-vertical);
 }
