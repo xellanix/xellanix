@@ -152,7 +152,7 @@ img {
     height: 104.5%;
 }
 #products-section > div.horizontal-layout {
-    row-gap: var(--section-gap-horizontal)
+    row-gap: var(--section-gap-horizontal);
 }
 #team-section p > br {
     display: initial;
@@ -180,5 +180,5 @@ img {
     row-gap: calc(var(--section-gap-vertical) * 2);
 }
 .social-media-links {
-    column-gap: var(--section-gap);
+    column-gap: var(--section-gap-vertical);
 }
