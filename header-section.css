@@ -37,10 +37,20 @@ header.hambar-opened {
     align-self: stretch;
     flex: 1 1 0;
 }
-.icon-landscape > img {
+.icon-landscape > a {
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--icon-gap);
+    align-self: stretch;
+    text-decoration: none !important;
+    color: inherit;
+}
+.icon-landscape > a > img {
     height: var(--icon-height);
 }
-.icon-landscape > div {
+.icon-landscape > a > div {
     font-size: var(--icon-text-size);
     font-weight: var(--icon-text-weight);
 }
