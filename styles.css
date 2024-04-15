@@ -91,14 +91,14 @@ img {
     flex-direction: column;
     align-items: center;
     width: 225px;
-    gap: calc(var(--section-gap-vertical) *4 / 3);
+    gap: calc(var(--section-gap-vertical) * 4 / 3);
 
 }
 .team-member-item > img {
     width: 225px;
     height: 300px;
     border-radius: 16px;
-    box-shadow: 0px 4px 50px 0px rgba(0,0,0,15%);
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 15%);
 }
 .team-member-item > div {
     gap: 8px;
@@ -122,10 +122,7 @@ img {
 *[data-insert-to-navbar-menu] {
     scroll-margin-top: var(--content-gap);
 }
-#home-section {
-    margin-top: calc(var(--content-gap) * -1);
-    padding-top: var(--content-gap);
-}
+
 #more-about-xellanix {
     text-align: center;
     column-gap: var(--section-gap-horizontal);
@@ -137,7 +134,6 @@ img {
 
 #products-section {
     gap: calc(var(--section-gap-vertical) * 2);
-    text-align: center;
     position: relative;
     --margin-manipulate: -400px;
     --margin-top-manipulate: -450px;
@@ -145,12 +141,12 @@ img {
     padding-block: calc(var(--margin-manipulate) * -1);
     margin-top: var(--margin-top-manipulate);
     padding-top: calc(var(--margin-top-manipulate) * -1);
-    scroll-margin-top: calc(calc(var(--margin-top-manipulate)/ 1.5)+ var(--content-gap));
+    scroll-margin-top: calc(calc(var(--margin-top-manipulate) / 1.5) + var(--content-gap));
 }
 #products-section > img {
     position: absolute;
     z-index: -100;
-    top: 640 px;
+    top: 640px;
     bottom: 29.5%;
     margin: auto 0;
     height: 104.5%;
