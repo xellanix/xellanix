@@ -86,6 +86,23 @@ img {
     border-radius: 12px;
     margin-top: 16px;
 }
+.team-member-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 225px;
+    gap: calc(var(--section-gap-vertical) *4 / 3);
+
+}
+.team-member-item > img {
+    width: 225px;
+    height: 300px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 50px 0px rgba(0,0,0,15%);
+}
+.team-member-item > div {
+    gap: 8px;
+}
 #hero-content {
     display: flex;
     flex-direction: column;
