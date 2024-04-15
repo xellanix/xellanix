@@ -169,3 +169,17 @@ img {
 #team-section > div.horizontal-layout {
     row-gap: calc(var(--section-gap-horizontal) * 1.5);
 }
+#service-section a {
+    color: inherit;
+    text-decoration: none !important;
+    margin: 0px;
+    font-size: var(--navigation-text-size);
+}
+#service-section a:hover {
+    color: inherit;
+    opacity: 0.6;
+}
+#service-section > .gap-15 {
+    column-gap: calc(var(--section-gap-horizontal) * 1.5);
+    row-gap: calc(var(--section-gap-vertical) * 2);
+}
