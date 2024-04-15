@@ -1,9 +1,52 @@
-section.horizontal-layout {
+.horizontal-layout {
+    display: flex;
     flex-direction: row;
+    column-gap: var(--section-gap-horizontal);
+    row-gap: var(--section-gap-vertical);
+    flex-wrap: wrap;
 }
-section.vertical-layout {
+.vertical-layout {
+    display: flex;
     flex-direction: column;
+    gap: var(--section-gap-vertical);
 }
-section.use-space-between {
+
+.vertical-layout-top-align {
+    display: flex;
+    justify-content: flex-start;
+}
+.vertical-layout-center-align {
+    display: flex;
+    justify-content: center;
+}
+.vertical-layout-bottom-align {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.horizontal-layout-left-align {
+    display: flex;
+    align-items: flex-start;
+}
+.horizontal-layout-center-align {
+    display: flex;
+    align-items: center;
+}
+.horizontal-layout-left-align {
+    display: flex;
+    align-items: flex-end;
+}
+
+.use-space-between {
+    display: flex;
     justify-content: space-between;
+}
+
+.flex-fill {
+    display: flex;
+    flex: 1 1 0;
+}
+.flex-hug {
+    display: flex;
+    flex: 0 0 0;
 }
