@@ -138,7 +138,7 @@ img {
     column-gap: var(--section-gap-horizontal);
     row-gap: calc(var(--section-gap-vertical) * 2);
 }
-#more-about-xelanix > * {
+#more-about-xellanix > * {
     min-width: 275px;
 }
 
