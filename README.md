@@ -16,6 +16,7 @@ The Community’s goals are:
 
 ## GitHub Performance
 ![xellanix's Stats](https://github-readme-stats.vercel.app/api?username=xellanix&theme=prussian&show_icons=true&hide_border=true&count_private=true&rank_icon=percentile) &nbsp;&nbsp;
+
 ![xellanix's Streak](https://github-readme-streak-stats.herokuapp.com/?user=xellanix&theme=prussian&hide_border=true) &nbsp;&nbsp;
 
 ![xellanix's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=xellanix&theme=prussian&show_icons=true&hide_border=true&layout=compact)
