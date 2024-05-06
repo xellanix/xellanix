@@ -13,3 +13,9 @@ The Community’s goals are:
 
 - Maintain and enhance Xellanix projects and libraries through a publicly accessible source code system under the MIT License.
 - Provide researchers and programmers, both individuals and teams, access to complete, free and open source projects and libraries.
+
+## GitHub Performance
+![xellanix's Stats](https://github-readme-stats.vercel.app/api?username=xellanix&theme=prussian&show_icons=true&hide_border=true&count_private=true&rank_icon=percentile) &nbsp;&nbsp;
+![xellanix's Streak](https://github-readme-streak-stats.herokuapp.com/?user=xellanix&theme=prussian&hide_border=true) &nbsp;&nbsp;
+
+![xellanix's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=xellanix&theme=prussian&show_icons=true&hide_border=true&layout=compact)
