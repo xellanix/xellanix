@@ -93,5 +93,55 @@ body > .body-wrapper {
 }
 
 .no-scroll {
-    overflow: hidden;
+	overflow: hidden;
+}
+.hide-all {
+	overflow: hidden;
+}
+
+#smoke-layer {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	visibility: hidden;
+
+	display: flex;
+
+	transition: visibility, background-color, -webkit-backdrop-filter,
+		backdrop-filter;
+	transition-duration: 150ms;
+	transition-timing-function: ease-out;
+}
+.no-scroll #smoke-layer {
+	visibility: visible;
+}
+.hide-all #smoke-layer {
+	visibility: visible;
+	z-index: 101;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+	#smoke-layer {
+		background-color: rgba(0, 0, 0, 0);
+		-webkit-backdrop-filter: blur(0px);
+		backdrop-filter: blur(0px);
+	}
+	.no-scroll #smoke-layer {
+		background-color: rgba(0, 0, 0, 0.35);
+		-webkit-backdrop-filter: blur(8px);
+		backdrop-filter: blur(8px);
+	}
+	.hide-all #smoke-layer {
+		background-color: rgba(0, 0, 0, 0.35);
+		-webkit-backdrop-filter: blur(8px);
+		backdrop-filter: blur(8px);
+	}
+}
+/* slightly transparent fallback for Firefox (not supporting backdrop-filter) */
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+	#smoke-layer {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
 }
