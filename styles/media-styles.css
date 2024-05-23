@@ -14,11 +14,12 @@
         --h2-font-size: 36px;
         --h3-font-size: 28px;
         --h4-font-size: 24px;
+        --h5-font-size: 20px;
         --h6-font-size: 32px;
         --p-font-size: 24px;
         --section-gap-vertical: 24px;
         --section-gap-horizontal: 64px;
-        --accent-button-font-size: 24px;
+        --button-font-size: 20px;
     }
 
     .product-item {
@@ -39,7 +40,7 @@
         --p-font-size: 20px;
         --section-gap-vertical: 20px;
         --section-gap-horizontal: 48px;
-        --accent-button-font-size: 20px;
+        --button-font-size: 20px;
     }
 
     #hero-content + img {
@@ -65,8 +66,9 @@
         --h1-font-size: 36px;
         --h2-font-size: 28px;
         --h3-font-size: 22px;
+        --h5-font-size: 16px;
         --h6-font-size: 24px;
-        --accent-button-font-size: 16px;
+        --button-font-size: 16px;
     }
 
     #hero-content {
@@ -91,10 +93,15 @@
         --h2-font-size: 22px;
         --h3-font-size: 20px;
         --h4-font-size: 16px;
+        --h5-font-size: 14px;
         --h6-font-size: 20px;
         --p-font-size: 16px;
         --section-gap-vertical: 12px;
         --section-gap-horizontal: 36px;
+        --button-font-size: 14px;
+        --button-padding-vertical: 14px;
+        --button-padding-horizontal: 20px;
+        --button-border-radius: 8px;
     }
 
     #hero-content {
@@ -106,23 +113,20 @@
     #hero-content + img {
         height: 342.0936px;
     }
-    #hero-content > .accent-button {
-        border-radius: 12px;
-    }
-    #hero-content > .accent-button > a {
-        padding: 16px 24px;
+    
+    #get-started-button {
+        --button-padding-vertical: 16px;
+        --button-padding-horizontal: 24px;
+        --button-border-radius: 12px;
     }
 
     .product-item {
         width: 180px;
         padding: 28px 14px;
     }
-    .product-item > .accent-button {
+    .product-item > .button.accent {
         border-radius: 8px;
         margin-top: 14px;
-    }
-    .product-item > .accent-button > a {
-        padding: 14px 20px;
     }
 }
 
@@ -222,6 +226,7 @@
 
     body > .body-wrapper {
         padding: 0px 48px;
+        padding-bottom: calc(var(--navigation-root-padding-vertical) * 2);
     }
 
     header {
