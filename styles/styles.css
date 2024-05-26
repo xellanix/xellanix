@@ -23,7 +23,18 @@
     border-radius: 12px;
     margin-top: 16px;
 }
-
+.product-item.special-item {
+    cursor: pointer;
+}
+.product-item.special-item > * {
+    opacity: 0.3;
+    width: 80%;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.product-item.special-item > img {
+    width: 40%;
+}
 .team-member-item {
     display: flex;
     flex-direction: column;
