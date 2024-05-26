@@ -25,6 +25,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://unpkg.com/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
 </head>
 <body class="light-theme">
@@ -172,11 +173,32 @@
         </main>
 
         <div id="smoke-layer" class="vertical-layout flex-align-middle flex-align-center">
+            <div id="popup" class="popup vertical-layout">
+                <div class="horizontal-layout">
+                    <div class="icon-landscape">
+                        <img src="assets/icon.svg" alt="Xellanix Icon" />
+                        <div>Xellanix</div>
+                    </div>
+                    <div id="popup-close-button" class="default-close-button vertical-layout flex-align-middle flex-align-center">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                    </div>
+                </div>
+                <div id="popup-container">
+                    <div id="popup-content" class="vertical-layout flex-align-center popup-content">
+                        
+                    </div>
+                </div>
+		    </div>
         </div>
     </div>
 
     <script src="scripts/main-app.js"></script>
     <script src="scripts/header-effects.js"></script>
+    <script src="scripts/infobox.js"></script>
+    <script src="scripts/input-field.js"></script>
+    <script src="scripts/popups/product.js"></script>
+    <script src="scripts/popups/member.js"></script>
+    <script src="scripts/popup.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script>
         LottieInteractivity.create({

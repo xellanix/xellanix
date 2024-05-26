@@ -25,3 +25,12 @@ function toCapitalizeEachWord(str = "", separator = " ", joinDelimiter = " ") {
 }
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+function retrieveFormData(form) {
+	return new FormData(form);
+}
+
+function retrieveFormEntries(form) {
+	const entries = Object.fromEntries(retrieveFormData(form).entries());
+	return entries;
+}
