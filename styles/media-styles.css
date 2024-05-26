@@ -25,6 +25,14 @@
     .product-item {
         width: 275px;
     }
+
+    #popup {
+        width: fit-content;
+    }
+    #popup-content > .horizontal-container-layout {
+        flex-wrap: nowrap;
+        padding: 0px var(--popup-padding);
+    }
 }
 
 @media (max-width: 1600px) {
@@ -49,6 +57,14 @@
     
     .product-item {
         width: 225px;
+    }
+    
+    #popup {
+        width: fit-content;
+    }
+    #popup-content > .horizontal-container-layout {
+        flex-wrap: nowrap;
+        padding: 0px var(--popup-padding);
     }
 }
 
@@ -211,6 +227,14 @@
     }
     #hero-content + img {
         display: none;
+    }
+
+    #popup {
+        width: 40dvw;
+    }
+    #popup-content > .horizontal-container-layout {
+        padding: 0px;
+        flex-wrap: wrap;
     }
 }
 
