@@ -171,6 +171,9 @@ p > br {
 	content: "";
 	margin-top: 0.5em;
 }
+strong {
+	font-weight: 700;
+}
 
 img {
 	object-fit: contain;

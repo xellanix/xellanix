@@ -21,7 +21,7 @@ function infoBox(status = "information", content = "") {
 							: statusId === 3
 							? "var(--error-background-color)"
 							: "var(--information-background-color)"
-					}; display: flex; flex-direction: row; align-items: center; gap: 8px; border-radius: var(--button-border-radius); padding: 16px; align-self: stretch;">
+					};">
 			<div
 				class="info-box-icon"
 				style="
@@ -34,7 +34,7 @@ function infoBox(status = "information", content = "") {
 								: statusId === 3
 								? "var(--error-color)"
 								: "var(--information-color)"
-						}; display: flex; align-items: center; justify-content: center; color: var(--secondary-background-color); width: 24px; height: 24px; border-radius: 32px;">
+						};">
 				${
 					statusId === 1
 						? `<svg  xmlns="http://www.w3.org/2000/svg"  width="14"  height="14"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-mark"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 19v.01" /><path d="M12 15v-10" /></svg>`
