@@ -15,11 +15,28 @@ function onProductSubmit(event) {
 
 	const final = retrieveFormEntries(event.target);
 
-	/* const error = false;
-	if (error) {
-		$("#new-product-error-wrapper").append(infoBox("error", "message"));
-		$("#new-product-error-wrapper").show();
-	} */
+	// Send the "final" data to backend
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:3000/api/eb82c110-9a34-46a0-9587-db8bf8576014",
+		data: JSON.stringify(final),
+		contentType: "application/json",
+		success: function (data) {
+			// Do something with the response
+			console.log("success: " + data.message);
+
+			location.reload();
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+			$("#new-product-error-wrapper").append(infoBox("error", errorMessage));
+			$("#new-product-error-wrapper").show();
+		},
+	});
 
 	return false;
 }
