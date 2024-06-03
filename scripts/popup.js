@@ -25,9 +25,9 @@ $("#popup-close-button").on("click", function () {
 	closePopup();
 });
 
-$("#create-new-product-item-button").on("click", function () {
+$("#products-container").on("click", "#create-new-product-item-button", function () {
 	openPopup(newProductPopup(), "productPopupLoaded");
 });
-$("#create-new-member-item-button").on("click", function () {
+$("#members-container").on("click", "#create-new-member-item-button", function () {
 	openPopup(newMemberPopup(), "memberPopupLoaded");
 });

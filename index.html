@@ -79,7 +79,7 @@
             <section class="vertical-layout text-align-center flex-align-center" id="products-section" data-insert-to-navbar-menu data-affect-to-navbar-menu="products-section">
                 <img src="assets/bg-custom-shape-1.svg" alt="">
                 <h2>Explore All the Works You've Never Imagined Before</h2>
-                <div class="horizontal-container-layout flex-align-center">
+                <div id="products-container" class="horizontal-container-layout flex-align-center">
                     <div class="product-item">
                         <h3>MasterTools</h3>
                         <p>An application with a set of unique and creative features, made with intention and love.</p>
@@ -101,16 +101,13 @@
                             <a href="https://github.com/xellanix/xellanix-lib" target="_blank" tabindex="-1">Learn More</a>
                         </div>
                     </div>
-                <div id="create-new-product-item-button" class="product-item special-item">
-                    <h3>Add a New Item</h3>
-                    <img src="assets/product-new-item-icon.svg" alt="New Product Item Icon">
                 </div>
             </section>
 
             <section class="vertical-layout text-align-center flex-align-center" id="team-section" data-insert-to-navbar-menu data-affect-to-navbar-menu="team-section">
                 <h2>You Are the One Who Builds This Community</h2>
                 <p>“We build this community with you, as by doing so,<br>there is great hope for ongoing growth.”</p>
-                <div class="horizontal-container-layout flex-align-center">
+                <div id="members-container" class="horizontal-container-layout flex-align-center">
                     <div class="team-member-item">
                         <img src="assets/member/donny.jpg" alt="Donny Andrian Picture">
                         <div class="vertical-layout">
@@ -131,10 +128,6 @@
                             <h3>Bernardo Ng</h3>
                             <p>Full Stack Developer</p>
                         </div>
-                    </div>
-                    <div id="create-new-member-item-button" class="product-item special-item">
-                        <h3>Add a New Item</h3>
-                        <img src="assets/product-new-item-icon.svg" alt="New Product Item Icon">
                     </div>
                 </div>
             </section>
@@ -205,6 +198,7 @@
     <script src="scripts/header-effects.js"></script>
     <script src="scripts/infobox.js"></script>
     <script src="scripts/input-field.js"></script>
+    <script src="scripts/loader.js"></script>
     <script src="scripts/popups/product.js"></script>
     <script src="scripts/popups/member.js"></script>
     <script src="scripts/popup.js"></script>
