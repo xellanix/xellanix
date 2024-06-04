@@ -25,52 +25,52 @@
 
 .vertical-layout.flex-align-top {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start !important;
 }
 .vertical-layout.flex-align-middle {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
 }
 .vertical-layout.flex-align-bottom {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
 .vertical-layout.flex-align-left {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start !important;
 }
 .vertical-layout.flex-align-center {
     display: flex;
-    align-items: center;
+    align-items: center !important;
 }
 .vertical-layout.flex-align-right {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end !important;
 }
 
 .horizontal-layout.flex-align-top, .horizontal-container-layout.flex-align-top {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start !important;
 }
 .horizontal-layout.flex-align-middle, .horizontal-container-layout.flex-align-middle {
     display: flex;
-    align-items: center;
+    align-items: center !important;
 }
 .horizontal-layout.flex-align-bottom, .horizontal-container-layout.flex-align-bottom {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end !important;
 }
 .horizontal-layout.flex-align-left, .horizontal-container-layout.flex-align-left {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start !important;
 }
 .horizontal-layout.flex-align-center, .horizontal-container-layout.flex-align-center {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
 }
 .horizontal-layout.flex-align-right, .horizontal-container-layout.flex-align-right {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
 
 .wrapper-only {
@@ -83,24 +83,24 @@
 }
 
 .flex-self-init {
-    align-self: initial;
+    align-self: initial !important;
 }
 .flex-self-left {
-    align-self: flex-start;
+    align-self: flex-start !important;
 }
 .flex-self-center {
-    align-self: center;
+    align-self: center !important;
 }
 .flex-self-right {
-    align-self: flex-end;
+    align-self: flex-end !important;
 }
 .flex-self-stretch {
-    align-self: stretch;
+    align-self: stretch !important;
 }
 
 .use-space-between {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
 }
 
 .flex-fill {
@@ -110,4 +110,14 @@
 .flex-hug {
     display: flex;
     flex: 0 0 0;
+}
+
+.flex-no-gap {
+    gap: 0px !important;
+}
+.flex-no-hgap {
+    column-gap: 0px !important;
+}
+.flex-no-vgap {
+    row-gap: 0px !important;
 }

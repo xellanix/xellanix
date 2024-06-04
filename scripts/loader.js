@@ -17,9 +17,17 @@ function fetchProducts() {
 					$("#products-container").append(`<div class="product-item">
 						<h3>${item.product_name}</h3>
 						<p>${item.description}</p>
-						<div class="button accent">
-							<a href="${item.learn_link}" target="_blank" tabindex="-1">Learn More</a>
-						</div>
+
+						<div class="vertical-layout flex-no-gap">
+                            <div class="button accent flex-self-center">
+                                <a href="${item.learn_link}" target="_blank" tabindex="-1">Learn More</a>
+                            </div>
+                            <div class="horizontal-layout flex-no-vgap flex-align-center" style="column-gap: 8px !important;">
+								<button type="button" data-product-ref="${item.product_id}" class="button icon accent flex-self-center product-item-edit" tabindex="-1">
+									<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+								</button>
+                            </div>
+                        </div>
 					</div>`);
 				} else if (item.access_type === "admin" || item.access_type === "superadmin") {
 					$("#products-container")
@@ -64,6 +72,11 @@ function fetchMembers() {
 							<h3>${item.member_name}</h3>
 							<p>${item.member_role}</p>
 						</div>
+						<div class="horizontal-layout flex-no-vgap flex-align-center" style="column-gap: 8px !important;">
+							<button type="button" data-member-ref="${item.member_id}" class="button icon accent flex-self-center member-edit" tabindex="-1">
+								<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+							</button>
+                        </div>
 					</div>`);
 				} else if (item.access_type === "admin" || item.access_type === "superadmin") {
 					$("#members-container")

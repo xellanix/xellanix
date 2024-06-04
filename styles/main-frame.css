@@ -23,10 +23,16 @@ html {
 	--accent-color-active: #0162b7;
 
 	--error-color: #e81e1e;
+	--error-color-hover: #ff2a2a;
+	--error-color-active: #de0101;
 	--error-background-color: rgba(232, 30, 30, 0.15);
 	--warning-color: #e8a21e;
+	--warning-color-hover: #ffb52a;
+	--warning-color-active: #de9201;
 	--warning-background-color: rgba(232, 162, 30, 0.15);
 	--success-color: #59a310;
+	--success-color-hover: #71ca1b;
+	--success-color-active: #4c9900;
 	--success-background-color: rgba(89, 163, 16, 0.15);
 	--information-color: var(--accent-color);
 	--information-background-color: rgba(25, 115, 193, 0.15);
@@ -50,10 +56,16 @@ html {
 	--accent-color-active: #35aae5;
 
 	--error-color: #ff6060;
+	--error-color-hover: #ff7676;
+	--error-color-active: #e53535;
 	--error-background-color: rgba(255, 96, 96, 0.15);
 	--warning-color: #e8a21e;
+	--warning-color-hover: #ffcf76;
+	--warning-color-active: #e5a835;
 	--warning-background-color: rgba(232, 162, 30, 0.15);
 	--success-color: #7ad123;
+	--success-color-hover: #bbff76;
+	--success-color-active: #8de535;
 	--success-background-color: rgba(122, 209, 35, 0.15);
 	--information-color: var(--accent-color);
 	--information-background-color: rgba(77, 195, 255, 0.15);

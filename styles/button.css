@@ -26,13 +26,9 @@
     font-size: inherit;
 }
 
-.button.accent {
-    background-color: var(--accent-color);
-    color: var(--accent-button-text-color);
-    border: 0px;
-}
-.button.accent:hover {
-    background-color: var(--accent-color-hover);
+.button.icon > a, button.button.icon {
+    padding: var(--button-padding-vertical) !important;
+    line-height: 0 !important;
 }
 
 button {
@@ -46,4 +42,40 @@ button {
     border-radius: var(--button-border-radius);
     font-size: var(--button-font-size);
     color: inherit;
+}
+
+.button.accent {
+    background-color: var(--accent-color);
+    color: var(--accent-button-text-color);
+    border: 0px;
+}
+.button.accent:hover {
+    background-color: var(--accent-color-hover);
+}
+
+.button.success {
+    background-color: var(--success-color);
+    color: var(--secondary-background-color);
+    border: 0px;
+}
+.button.success:hover {
+    background-color: var(--success-color-hover);
+}
+
+.button.warning {
+    background-color: var(--warning-color);
+    color: var(--secondary-background-color);
+    border: 0px;
+}
+.button.warning:hover {
+    background-color: var(--warning-color-hover);
+}
+
+.button.error {
+    background-color: var(--error-color);
+    color: var(--secondary-background-color);
+    border: 0px;
+}
+.button.error:hover {
+    background-color: var(--error-color-hover);
 }

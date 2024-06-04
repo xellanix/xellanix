@@ -140,7 +140,7 @@
         width: 180px;
         padding: 28px 14px;
     }
-    .product-item > .button.accent {
+    .product-item .button {
         border-radius: 8px;
         margin-top: 14px;
     }

@@ -21,10 +21,15 @@ function onProductSubmit(event) {
 		url: "http://localhost:3000/api/eb82c110-9a34-46a0-9587-db8bf8576014",
 		data: JSON.stringify(final),
 		contentType: "application/json",
-		success: function (data) {
+		success: async function (data) {
 			// Do something with the response
 			console.log("success: " + data.message);
+			$("#new-product-error-wrapper").append(
+				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+			);
+			$("#new-product-error-wrapper").show();
 
+			await delay(2000);
 			location.reload();
 		},
 		error: function (xhr, status, error) {
@@ -41,8 +46,24 @@ function onProductSubmit(event) {
 	return false;
 }
 
+function onProductUpdatedSubmit(event) {
+	event.preventDefault();
+
+	const final = retrieveFormEntries(event.target);
+
+	return false;
+}
+
 $(document).on("productPopupLoaded", function (event, element) {
 	$("#new-product-error-wrapper").hide();
+});
+$(document).on("updateProductPopupLoaded", function (event, element) {
+	$("#new-product-error-wrapper").hide();
+});
+
+$("#products-container").on("click", ".product-item-edit", function (event) {
+	const productRef = $(event.currentTarget).data("productRef");
+	productRef && openPopup(updateProductPopup(productRef), "updateProductPopupLoaded");
 });
 
 function newProductPopup() {
@@ -94,6 +115,74 @@ function newProductPopup() {
                     style="margin-top: var(--section-gap-vertical)"
                 >
                     Add This Product
+                </button>
+            </form>
+        </div>
+        <div class="vertical-layout flex-align-center" style="position: sticky; top: 0; align-self: flex-start; flex: 0 1 0;">
+            <h4 class="text-align-center">Preview</h4>
+            <div class="product-item text-align-center">
+                <h3 id="new-product-preview-name">Default Name</h3>
+                <p id="new-product-preview-description">Description</p>
+                <div class="button accent">
+                    <a id="new-product-preview-link" href="/" target="_blank" tabindex="-1">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+	return final;
+}
+
+function updateProductPopup(productRef) {
+	const fields = [
+		{
+			name: "prod_name",
+			type: "text",
+			placeholder: "The product name",
+			label: "Name",
+			onInput: "onProductNameChange",
+			emptyError: "Enter the product name",
+			patternError: "Product name is invalid",
+		},
+		{
+			name: "prod_desc",
+			type: "text_long",
+			placeholder: "The product description",
+			label: "Description",
+			onInput: "onProductDescChange",
+			emptyError: "Enter the product description",
+			patternError: "Product description is invalid",
+		},
+		{
+			name: "prod_url",
+			type: "url",
+			placeholder: "https://github.com/xellanix/product",
+			label: "Target Link",
+			onInput: "onProductUrlChange",
+			emptyError: "Enter the target link",
+			patternError: "Target link is invalid",
+		},
+	];
+
+	const final = `
+    <div class="horizontal-container-layout flex-align-center">
+        <div class="vertical-layout flex-align-center" style="flex: 1 1 0">
+            <h2 class="text-align-center">Edit Product: #${productRef}</h2>
+            <div id="new-product-error-wrapper" class="wrapper-only" style="align-self: stretch"></div>
+            <form
+                id="update-product-form"
+                class="vertical-layout flex-self-init flex-align-center"
+                style="margin-top: var(--section-gap-vertical)"
+                onsubmit="return onProductUpdatedSubmit(event)"
+            >
+                ${fields.map((field) => inputField(field)).join("")}
+                <button
+                    type="submit"
+                    class="button accent flex-self-center"
+                    style="margin-top: var(--section-gap-vertical)"
+                >
+                    Update This Product
                 </button>
             </form>
         </div>

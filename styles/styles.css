@@ -17,7 +17,7 @@
 .product-item > p {
     white-space: pre-wrap;
 }
-.product-item > .button.accent {
+.product-item .button {
     align-self: center;
     font-size: calc(var(--accent-button-font-size) * 5 / 6);
     border-radius: 12px;
