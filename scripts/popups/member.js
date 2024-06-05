@@ -28,6 +28,27 @@ function onMemberSubmit(event) {
 		$("#new-member-error-wrapper").append(infoBox("error", "message"));
 		$("#new-member-error-wrapper").show();
 	} */
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:3000/api/23b9d3e8-ae4d-4420-b136-ea905f7844ed",
+		data: JSON.stringify(final),
+		contentType: "application/json",
+		success: function (data) {
+			// Do something with the response
+			console.log("success: " + data.message);
+
+			location.reload();
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+			$("#new-member-error-wrapper").append(infoBox("error", errorMessage));
+			$("#new-member-error-wrapper").show();
+		},
+	});
 
 	return false;
 }
