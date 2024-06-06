@@ -12,6 +12,7 @@ header {
     padding: var(--navigation-root-padding-vertical) 0px;
     position: sticky;
     top: 0;
+    gap: var(--navigation-gap);
     
     background-color: var(--primary-background-color);
     margin-left: calc(var(--navigation-root-padding-vertical) * -1.5);
@@ -53,6 +54,11 @@ header.hambar-opened {
 .icon-landscape > a > div {
     font-size: var(--icon-text-size);
     font-weight: var(--icon-text-weight);
+}
+
+header .button {
+    font-size: min(var(--navigation-text-size), var(button-font-size));
+    border-radius: 8px;
 }
 
 .hamburger-button {

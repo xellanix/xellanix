@@ -1,3 +1,24 @@
+function refreshToken() {
+	try {
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/auth/token",
+			success: function (data) {
+				$("#openPopup").text("Sign Out");
+				console.log(data.accessToken);
+			},
+			error: function (xhr, status, error) {
+				// Handle error
+				let errorCode = xhr.status;
+				let errorText = xhr.statusText;
+				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+				console.error(errorMessage);
+			},
+		});
+	} catch (error) {}
+}
+
 function fetchProducts() {
 	// Send GET request to get json value
 
@@ -99,5 +120,6 @@ function fetchMembers() {
 	});
 }
 
+refreshToken();
 fetchProducts();
 fetchMembers();

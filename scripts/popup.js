@@ -31,3 +31,11 @@ $("#products-container").on("click", "#create-new-product-item-button", function
 $("#members-container").on("click", "#create-new-member-item-button", function () {
 	openPopup(newMemberPopup(), "memberPopupLoaded");
 });
+$("#openPopup").on("click", function () {
+	openPopup(onUserSignIn(), "authPopupLoaded");
+});
+
+/* $("#openReg").on("click", function () {
+	openPopup(onUserSignUp(), "regPopupLoaded");
+});
+ */
