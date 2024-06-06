@@ -21,22 +21,23 @@ function onMemberImgChange(input) {
 function onMemberSubmit(event) {
 	event.preventDefault();
 
-	const final = retrieveFormEntries(event.target);
+	const final = retrieveFormData(event.target);
 
-	/* const error = false;
-	if (error) {
-		$("#new-member-error-wrapper").append(infoBox("error", "message"));
-		$("#new-member-error-wrapper").show();
-	} */
 	$.ajax({
 		type: "POST",
 		url: "http://localhost:3000/api/23b9d3e8-ae4d-4420-b136-ea905f7844ed",
-		data: JSON.stringify(final),
-		contentType: "application/json",
-		success: function (data) {
+		data: final,
+		processData: false,
+		contentType: false,
+		success: async function (data) {
 			// Do something with the response
 			console.log("success: " + data.message);
+			$("#new-product-error-wrapper").append(
+				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+			);
+			$("#new-product-error-wrapper").show();
 
+			await delay(2000);
 			location.reload();
 		},
 		error: function (xhr, status, error) {
