@@ -14,35 +14,39 @@ function onSignInSubmit(event) {
 	const final = retrieveFormEntries(event.target);
 
 	// Send the "final" data to backend
-	$.ajax({
-		type: "POST",
-		url: "http://localhost:3000/auth",
-		data: JSON.stringify(final),
-		contentType: "application/json",
-		success: async function (data) {
-			// Do something with the response
-			$("#openPopup").text("Sign Out");
-			console.log("success: " + data.message);
-			console.log("access_token: " + data.accessToken);
-			$("#user-signin-error-wrapper").append(
-				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
-			);
-			$("#user-signin-error-wrapper").show();
+	ajaxRequest(
+		{},
+		{
+			type: "POST",
+			url: "http://localhost:3000/auth",
+			data: JSON.stringify(final),
+			contentType: "application/json",
+			xhrFields: {
+				withCredentials: true, // Include cookies in the request
+			},
+			success: async function (data) {
+				// Do something with the response
+				localStorage.setItem("refreshToken", data.refreshToken);
 
-			await delay(2000);
-			refreshToken();
-			//location.reload();
-		},
-		error: function (xhr, status, error) {
-			// Handle error
-			let errorCode = xhr.status;
-			let errorText = xhr.statusText;
-			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+				$("#user-signin-error-wrapper").append(
+					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+				);
+				$("#user-signin-error-wrapper").show();
 
-			$("#user-signin-error-wrapper").append(infoBox("error", errorMessage));
-			$("#user-signin-error-wrapper").show();
-		},
-	});
+				await delay(2000);
+				location.reload();
+			},
+			error: function (xhr, status, error) {
+				// Handle error
+				let errorCode = xhr.status;
+				let errorText = xhr.statusText;
+				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+				$("#user-signin-error-wrapper").append(infoBox("error", errorMessage));
+				$("#user-signin-error-wrapper").show();
+			},
+		}
+	);
 	return false;
 }
 
@@ -165,40 +169,35 @@ function onUserSignUp() {
 */
 
 function signOutUser() {
-	$.ajax({
-		type: "DELETE",
-		url: "http://localhost:3000/auth/signout",
-		data: JSON.stringify({}),
-		contentType: "application/json",
-		success: async function (data) {
-			console.log("Signed out successfully: " + data.message);
+	const refreshToken = localStorage.getItem("refreshToken");
+	if (!refreshToken) {
+		alert("Already signed out");
+		location.reload();
+	}
 
-			// Optional: Display success message to the user
-			$("#user-signin-error-wrapper").append(
-				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
-			);
-			$("#user-signin-error-wrapper").show();
-
-			await delay(2000);
-			location.reload();
-
-			// Change the button text back to "Sign In" upon successful sign-out
-			$("#auth-button").text("Sign In");
+	ajaxRequest(
+		{
+			Authorization: `Bearer ${refreshToken}`,
 		},
-		error: function (xhr, status, error) {
-			let errorCode = xhr.status;
-			let errorText = xhr.statusText;
-			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+		{
+			type: "DELETE",
+			url: `http://localhost:3000/auth/signout/`,
+			success: async function (data) {
+				console.log("Signed out successfully: " + data.message);
 
-			console.error(errorMessage);
+				localStorage.removeItem("refreshToken");
+				sessionStorage.removeItem("accessToken");
+				sessionStorage.removeItem("exp");
 
-			// Optional: Display error message to the user
-			/* $("#user-signin-error-wrapper").append(infoBox("error", errorMessage));
-            $("#user-signin-error-wrapper").show(); */
-		},
-	});
-}
+				location.reload();
+			},
+			error: function (xhr, status, error) {
+				let errorCode = xhr.status;
+				let errorText = xhr.statusText;
+				let errorMessage = `Error ${errorCode}: ${errorText}`;
 
-function delay(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
+				alert(errorMessage);
+			},
+		}
+	);
 }

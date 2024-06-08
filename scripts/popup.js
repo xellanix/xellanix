@@ -31,8 +31,14 @@ $("#products-container").on("click", "#create-new-product-item-button", function
 $("#members-container").on("click", "#create-new-member-item-button", function () {
 	openPopup(newMemberPopup(), "memberPopupLoaded");
 });
-$("#openPopup").on("click", function () {
-	openPopup(onUserSignIn(), "authPopupLoaded");
+$("#reqAuthBtn").on("click", function () {
+	// check if the button text is "Sign in" or "Sign out"
+	const text = $("#reqAuthBtn").text();
+	if (text === "Sign in") {
+		openPopup(onUserSignIn(), "authPopupLoaded");
+	} else if (text === "Sign out") {
+		signOutUser();
+	}
 });
 
 /* $("#openReg").on("click", function () {

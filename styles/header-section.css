@@ -57,7 +57,7 @@ header.hambar-opened {
 }
 
 header .button {
-    font-size: min(var(--navigation-text-size), var(button-font-size));
+    font-size: min(var(--navigation-text-size), var(--button-font-size));
     border-radius: 8px;
 }
 

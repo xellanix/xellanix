@@ -16,32 +16,35 @@ function onProductSubmit(event) {
 	const final = retrieveFormEntries(event.target);
 
 	// Send the "final" data to backend
-	$.ajax({
-		type: "POST",
-		url: "http://localhost:3000/api/eb82c110-9a34-46a0-9587-db8bf8576014",
-		data: JSON.stringify(final),
-		contentType: "application/json",
-		success: async function (data) {
-			// Do something with the response
-			console.log("success: " + data.message);
-			$("#new-product-error-wrapper").append(
-				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
-			);
-			$("#new-product-error-wrapper").show();
+	ajaxRequest(
+		{},
+		{
+			type: "POST",
+			url: "http://localhost:3000/api/eb82c110-9a34-46a0-9587-db8bf8576014",
+			data: JSON.stringify(final),
+			contentType: "application/json",
+			success: async function (data) {
+				// Do something with the response
+				console.log("success: " + data.message);
+				$("#new-product-error-wrapper").append(
+					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+				);
+				$("#new-product-error-wrapper").show();
 
-			await delay(2000);
-			location.reload();
-		},
-		error: function (xhr, status, error) {
-			// Handle error
-			let errorCode = xhr.status;
-			let errorText = xhr.statusText;
-			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+				await delay(2000);
+				location.reload();
+			},
+			error: function (xhr, status, error) {
+				// Handle error
+				let errorCode = xhr.status;
+				let errorText = xhr.statusText;
+				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
 
-			$("#new-product-error-wrapper").append(infoBox("error", errorMessage));
-			$("#new-product-error-wrapper").show();
-		},
-	});
+				$("#new-product-error-wrapper").append(infoBox("error", errorMessage));
+				$("#new-product-error-wrapper").show();
+			},
+		}
+	);
 
 	return false;
 }
