@@ -21,6 +21,10 @@ function onMemberImgChange(input) {
 function onMemberSubmit(event) {
 	event.preventDefault();
 
+	const submitBtn = $(event.target).find("button[type='submit']");
+	submitBtn.prop("disabled", true);
+	submitBtn.text("Adding...");
+
 	const final = retrieveFormData(event.target);
 
 	ajaxRequest(
@@ -34,10 +38,14 @@ function onMemberSubmit(event) {
 			success: async function (data) {
 				// Do something with the response
 				console.log("success: " + data.message);
-				$("#new-product-error-wrapper").append(
+				$("#new-member-error-wrapper").find("*").off();
+				$("#new-member-error-wrapper").empty();
+				$("#new-member-error-wrapper").append(
 					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
 				);
-				$("#new-product-error-wrapper").show();
+				$("#new-member-error-wrapper").show();
+
+				submitBtn.text("Member Added");
 
 				await delay(2000);
 				location.reload();
@@ -48,8 +56,13 @@ function onMemberSubmit(event) {
 				let errorText = xhr.statusText;
 				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
 
+				$("#new-member-error-wrapper").find("*").off();
+				$("#new-member-error-wrapper").empty();
 				$("#new-member-error-wrapper").append(infoBox("error", errorMessage));
 				$("#new-member-error-wrapper").show();
+
+				submitBtn.text("Add This Member");
+				submitBtn.prop("disabled", false);
 			},
 		}
 	);
@@ -124,7 +137,7 @@ function newMemberPopup() {
         <div class="vertical-layout flex-align-center" style="position: sticky; top: 0; align-self: flex-start; flex: 0 1 0;">
             <h4 class="text-align-center">Preview</h4>
             <div class="team-member-item text-align-center">
-                <img id="new-member-preview-img" src="assets/member/donny.jpg" alt="Default Name Picture">
+                <img id="new-member-preview-img" src="assets/photo-sample.svg" alt="Default Name Picture">
                 <div class="vertical-layout">
                     <h3 id="new-member-preview-name">Default Name</h3>
                     <p id="new-member-preview-role">User</p>

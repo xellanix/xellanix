@@ -16,6 +16,7 @@
 }
 .product-item > p {
     white-space: pre-wrap;
+    flex: 1 1 0;
 }
 .product-item .button {
     align-self: center;

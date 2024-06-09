@@ -11,6 +11,10 @@ $(document).ready(function () {
 function onSignInSubmit(event) {
 	event.preventDefault();
 
+	const submitBtn = $(event.target).find("button[type='submit']");
+	submitBtn.prop("disabled", true);
+	submitBtn.text("Signing In...");
+
 	const final = retrieveFormEntries(event.target);
 
 	// Send the "final" data to backend
@@ -28,10 +32,14 @@ function onSignInSubmit(event) {
 				// Do something with the response
 				localStorage.setItem("refreshToken", data.refreshToken);
 
+				$("#user-signin-error-wrapper").find("*").off();
+				$("#user-signin-error-wrapper").empty();
 				$("#user-signin-error-wrapper").append(
 					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
 				);
 				$("#user-signin-error-wrapper").show();
+
+				submitBtn.text("Sign In Successfully");
 
 				await delay(2000);
 				location.reload();
@@ -42,8 +50,13 @@ function onSignInSubmit(event) {
 				let errorText = xhr.statusText;
 				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
 
+				$("#user-signin-error-wrapper").find("*").off();
+				$("#user-signin-error-wrapper").empty();
 				$("#user-signin-error-wrapper").append(infoBox("error", errorMessage));
 				$("#user-signin-error-wrapper").show();
+
+				submitBtn.text("Sign In");
+				submitBtn.prop("disabled", false);
 			},
 		}
 	);
@@ -90,7 +103,7 @@ function onUserSignIn() {
                     class="button accent flex-self-center"
                     style="margin-top: var(--section-gap-vertical)"
                 >
-                    Sign in
+                    Sign In
                 </button>
             </form>
         </div>

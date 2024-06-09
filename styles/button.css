@@ -19,6 +19,10 @@
     background-color: var(--information-background-color);
     border-color: transparent;
 }
+.button:disabled, .button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 .button > a {
     color: inherit;
     text-decoration: none !important;

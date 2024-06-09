@@ -95,39 +95,110 @@ async function fetchProducts() {
 		success: function ({ items, action }) {
 			const hasAction = Object.entries(action).length > 0;
 
-			items.forEach((item) => {
-				if (item.access_type === "user") {
-					$("#products-container").append(`<div class="product-item">
-						<h3>${item.product_name}</h3>
-						<p>${item.description}</p>
+			if (items?.length > 0) {
+				$("#products-container").find("*").off();
+				$("#products-container").empty();
+			}
 
-						<div class="vertical-layout flex-no-gap">
-                            <div class="button accent flex-self-center">
-                                <a href="${
-									item.learn_link
-								}" target="_blank" tabindex="-1">Learn More</a>
-                            </div>
-                            ${
-								hasAction
-									? `<div class="horizontal-layout flex-no-vgap flex-align-center" style="column-gap: 8px !important;">
-								${
-									action.edit
-										? `<button type="button" data-product-ref="${item.product_id}" class="button icon accent flex-self-center product-item-edit" tabindex="-1">
-									<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-								</button>`
-										: ""
-								}
-                            </div>`
-									: ""
-							}
-                        </div>
-					</div>`);
+			items?.forEach((item) => {
+				if (item.access_type === "user") {
+					$("#products-container").append(
+						htmlBuilder({
+							tag: "div",
+							classes: ["product-item"],
+							children: [
+								{
+									tag: "h3",
+									content: item.product_name,
+								},
+								{
+									tag: "p",
+									content: item.description,
+								},
+								{
+									tag: "div",
+									classes: ["vertical-layout", "flex-no-gap"],
+									children: [
+										{
+											tag: "div",
+											classes: ["button", "accent", "flex-self-center"],
+											children: [
+												{
+													tag: "a",
+													attrs: {
+														href: item.learn_link,
+														target: "_blank",
+														tabindex: "-1",
+													},
+													content: "Learn More",
+												},
+											],
+										},
+										{
+											tag: "div",
+											classes: [
+												"horizontal-layout",
+												"flex-no-vgap",
+												"flex-align-center",
+											],
+											addIf: hasAction,
+											attrs: {
+												style: "column-gap: 8px !important;",
+											},
+											children: [
+												{
+													tag: "button",
+													classes: [
+														"button",
+														"icon",
+														"accent",
+														"flex-self-center",
+														"product-item-edit",
+													],
+													addIf: action.edit,
+													attrs: {
+														type: "button",
+														"data-product-ref": item.product_id,
+														tabindex: "-1",
+													},
+													content: `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>`,
+												},
+											],
+										},
+									],
+								},
+							],
+						})
+					);
 				} else if (item.access_type === "admin" || item.access_type === "superadmin") {
-					$("#products-container")
-						.append(`<div id="${item.product_name}" class="product-item special-item">
-						<h3>${item.description}</h3>
-						<img src="assets/product-new-item-icon.svg" alt="${item.description} Icon">
-					</div>`);
+					$("#products-container").append(
+						htmlBuilder({
+							tag: "div",
+							id: item.product_name,
+							classes: ["product-item", "special-item"],
+							children: [
+								{
+									tag: "h3",
+									content: item.description,
+								},
+								{
+									tag: "img",
+									attrs: {
+										src: "assets/product-new-item-icon.svg",
+										alt: item.description + " Icon",
+										style: "flex: 1 1 0;",
+									},
+								},
+								{
+									tag: "h3",
+									content: item.description,
+									attrs: {
+										style: "visibility: hidden; --webkit-user-select: none; user-select: none;",
+									},
+								},
+							],
+						})
+					);
 				}
 			});
 		},
@@ -154,34 +225,99 @@ async function fetchMembers() {
 		success: function ({ items, action }) {
 			const hasAction = Object.entries(action).length > 0;
 
-			items.forEach((item) => {
+			if (items?.length > 0) {
+				$("#members-container").find("*").off();
+				$("#members-container").empty();
+			}
+
+			items?.forEach((item) => {
 				if (item.access_type === "user") {
-					$("#members-container").append(`<div class="team-member-item">
-						<img src="${item.member_photo}" alt="${item.member_name} Picture">
-						<div class="vertical-layout">
-							<h3>${item.member_name}</h3>
-							<p>${item.member_role}</p>
-						</div>
-						${
-							hasAction
-								? `<div class="horizontal-layout flex-no-vgap flex-align-center" style="column-gap: 8px !important;">
-							${
-								action.edit
-									? `<button type="button" data-member-ref="${item.member_id}" class="button icon accent flex-self-center member-edit" tabindex="-1">
-								<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-							</button>`
-									: ""
-							}
-                        </div>`
-								: ""
-						}
-					</div>`);
+					$("#members-container").append(
+						htmlBuilder({
+							tag: "div",
+							classes: ["team-member-item"],
+							children: [
+								{
+									tag: "img",
+									attrs: {
+										src: item.member_photo,
+										alt: item.member_name + " Picture",
+									},
+								},
+								{
+									tag: "div",
+									classes: ["vertical-layout"],
+									children: [
+										{
+											tag: "h3",
+											content: item.member_name,
+										},
+										{
+											tag: "p",
+											content: item.member_role,
+										},
+									],
+								},
+								{
+									tag: "div",
+									classes: [
+										"horizontal-layout",
+										"flex-no-vgap",
+										"flex-align-center",
+									],
+									addIf: hasAction,
+									attrs: {
+										style: "column-gap: 8px !important;",
+									},
+									children: [
+										{
+											tag: "button",
+											addIf: action.edit,
+											classes: [
+												"button",
+												"icon",
+												"accent",
+												"flex-self-center",
+												"member-edit",
+											],
+											attrs: {
+												type: "button",
+												"data-member-ref": item.member_id,
+												tabindex: "-1",
+											},
+											content: `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>`,
+										},
+									],
+								},
+							],
+						})
+					);
 				} else if (item.access_type === "admin" || item.access_type === "superadmin") {
-					$("#members-container")
-						.append(`<div id="${item.member_name}" class="product-item special-item">
-                        <h3>${item.member_role}</h3>
-                        <img src="assets/product-new-item-icon.svg" alt="${item.member_role} Icon">
-                    </div>`);
+					$("#members-container").append(
+						htmlBuilder({
+							tag: "div",
+							id: item.member_name,
+							classes: ["product-item", "special-item"],
+							children: [
+								{ tag: "h3", content: item.member_role },
+								{
+									tag: "img",
+									attrs: {
+										src: "assets/member-new-item-icon.svg",
+										alt: item.member_role + " Icon",
+										style: "flex: 1 1 0;",
+									},
+								},
+								{
+									tag: "h3",
+									content: item.member_role,
+									attrs: {
+										style: "visibility: hidden; --webkit-user-select: none; user-select: none;",
+									},
+								},
+							],
+						})
+					);
 				}
 			});
 		},

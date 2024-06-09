@@ -13,6 +13,10 @@ function onProductUrlChange() {
 function onProductSubmit(event) {
 	event.preventDefault();
 
+	const submitBtn = $(event.target).find("button[type='submit']");
+	submitBtn.prop("disabled", true);
+	submitBtn.text("Adding...");
+
 	const final = retrieveFormEntries(event.target);
 
 	// Send the "final" data to backend
@@ -26,10 +30,14 @@ function onProductSubmit(event) {
 			success: async function (data) {
 				// Do something with the response
 				console.log("success: " + data.message);
+				$("#new-product-error-wrapper").find("*").off();
+				$("#new-product-error-wrapper").empty();
 				$("#new-product-error-wrapper").append(
 					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
 				);
 				$("#new-product-error-wrapper").show();
+
+				submitBtn.text("Product Added");
 
 				await delay(2000);
 				location.reload();
@@ -40,8 +48,13 @@ function onProductSubmit(event) {
 				let errorText = xhr.statusText;
 				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
 
+				$("#new-product-error-wrapper").find("*").off();
+				$("#new-product-error-wrapper").empty();
 				$("#new-product-error-wrapper").append(infoBox("error", errorMessage));
 				$("#new-product-error-wrapper").show();
+
+				submitBtn.text("Add This Product");
+				submitBtn.prop("disabled", false);
 			},
 		}
 	);
