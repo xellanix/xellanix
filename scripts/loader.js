@@ -169,7 +169,7 @@ async function fetchProducts() {
 													classes: [
 														"button",
 														"icon",
-														"accent",
+														"error",
 														"flex-self-center",
 														"product-item-delete",
 													],
@@ -310,7 +310,7 @@ async function fetchMembers() {
 											classes: [
 												"button",
 												"icon",
-												"accent",
+												"error",
 												"flex-self-center",
 												"member-delete",
 											],
