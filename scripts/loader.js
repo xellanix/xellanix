@@ -28,7 +28,7 @@ async function refreshToken() {
 			},
 			{
 				type: "GET",
-				url: `http://localhost:3000/auth/token/`,
+				url: `${basePath}/auth/token/`,
 				xhrFields: {
 					withCredentials: true, // Include cookies in the request
 				},
@@ -91,7 +91,7 @@ async function fetchProducts() {
 	// Send GET request to get json value
 	ajaxRequest(headers, {
 		type: "GET",
-		url: "http://localhost:3000/api/da24dea7-d4ce-4e31-a531-96d6c466ea38",
+		url: `${basePath}/api/da24dea7-d4ce-4e31-a531-96d6c466ea38`,
 		success: function ({ items, action }) {
 			const hasAction = Object.entries(action).length > 0;
 
@@ -163,6 +163,23 @@ async function fetchProducts() {
 													},
 													content: `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>`,
 												},
+												{
+													tag: "button",
+													addIf: action.delete,
+													classes: [
+														"button",
+														"icon",
+														"accent",
+														"flex-self-center",
+														"product-item-delete",
+													],
+													attrs: {
+														type: "button",
+														"data-product-ref": item.product_id,
+														tabindex: "-1",
+													},
+													content: `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>`,
+												},
 											],
 										},
 									],
@@ -221,7 +238,7 @@ async function fetchMembers() {
 	// Send GET request to get json value
 	ajaxRequest(headers, {
 		type: "GET",
-		url: "http://localhost:3000/api/2410fb2e-bd08-4678-be1b-c05ebb13a5c1",
+		url: `${basePath}/api/2410fb2e-bd08-4678-be1b-c05ebb13a5c1`,
 		success: function ({ items, action }) {
 			const hasAction = Object.entries(action).length > 0;
 
@@ -286,6 +303,23 @@ async function fetchMembers() {
 												tabindex: "-1",
 											},
 											content: `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>`,
+										},
+										{
+											tag: "button",
+											addIf: action.delete,
+											classes: [
+												"button",
+												"icon",
+												"accent",
+												"flex-self-center",
+												"member-delete",
+											],
+											attrs: {
+												type: "button",
+												"data-member-ref": item.member_id,
+												tabindex: "-1",
+											},
+											content: `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.8"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>`,
 										},
 									],
 								},

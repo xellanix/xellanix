@@ -18,7 +18,7 @@ function onMemberImgChange(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 }
-function onMemberSubmit(event) {
+async function onMemberSubmit(event) {
 	event.preventDefault();
 
 	const submitBtn = $(event.target).find("button[type='submit']");
@@ -27,45 +27,45 @@ function onMemberSubmit(event) {
 
 	const final = retrieveFormData(event.target);
 
-	ajaxRequest(
-		{},
-		{
-			type: "POST",
-			url: "http://localhost:3000/api/23b9d3e8-ae4d-4420-b136-ea905f7844ed",
-			data: final,
-			processData: false,
-			contentType: false,
-			success: async function (data) {
-				// Do something with the response
-				console.log("success: " + data.message);
-				$("#new-member-error-wrapper").find("*").off();
-				$("#new-member-error-wrapper").empty();
-				$("#new-member-error-wrapper").append(
-					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
-				);
-				$("#new-member-error-wrapper").show();
+	const accessToken = await retrieveUsableToken();
+	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
 
-				submitBtn.text("Member Added");
+	ajaxRequest(headers, {
+		type: "POST",
+		url: `${basePath}/api/23b9d3e8-ae4d-4420-b136-ea905f7844ed`,
+		data: final,
+		processData: false,
+		contentType: false,
+		success: async function (data) {
+			// Do something with the response
+			console.log("success: " + data.message);
+			$("#new-member-error-wrapper").find("*").off();
+			$("#new-member-error-wrapper").empty();
+			$("#new-member-error-wrapper").append(
+				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+			);
+			$("#new-member-error-wrapper").show();
 
-				await delay(2000);
-				location.reload();
-			},
-			error: function (xhr, status, error) {
-				// Handle error
-				let errorCode = xhr.status;
-				let errorText = xhr.statusText;
-				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+			submitBtn.text("Member Added");
 
-				$("#new-member-error-wrapper").find("*").off();
-				$("#new-member-error-wrapper").empty();
-				$("#new-member-error-wrapper").append(infoBox("error", errorMessage));
-				$("#new-member-error-wrapper").show();
+			await delay(2000);
+			location.reload();
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
 
-				submitBtn.text("Add This Member");
-				submitBtn.prop("disabled", false);
-			},
-		}
-	);
+			$("#new-member-error-wrapper").find("*").off();
+			$("#new-member-error-wrapper").empty();
+			$("#new-member-error-wrapper").append(infoBox("error", errorMessage));
+			$("#new-member-error-wrapper").show();
+
+			submitBtn.text("Add This Member");
+			submitBtn.prop("disabled", false);
+		},
+	});
 
 	return false;
 }
@@ -74,12 +74,51 @@ $(document).on("memberPopupLoaded", function (event, element) {
 	$("#new-member-error-wrapper").hide();
 });
 $(document).on("updateMemberPopupLoaded", function (event, element) {
-	$("#new-member-error-wrapper").hide();
+	$("#update-member-error-wrapper").hide();
+});
+$(document).on("deleteMemberPopupLoaded", function (event, element) {
+	$("#delete-member-error-wrapper").hide();
+
+	$("#confirm-delete-member").on("click", function (e) {
+		const memberRef = $(e.currentTarget).data("memberRef");
+		ajaxRequest(
+			{},
+			{
+				type: "DELETE",
+				url: `${basePath}/api/xxx/${memberRef}`,
+				success: function (data) {
+					// Do something with the response
+					console.log("success: " + data.message);
+					location.reload();
+				},
+				error: function (xhr, status, error) {
+					// Handle error
+					let errorCode = xhr.status;
+					let errorText = xhr.statusText;
+					let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+					$("#delete-member-error-wrapper").find("*").off();
+					$("#delete-member-error-wrapper").empty();
+					$("#delete-member-error-wrapper").append(infoBox("error", errorMessage));
+					$("#delete-member-error-wrapper").show();
+				},
+			}
+		);
+	});
+
+	$("#cancel-delete-member").on("click", function () {
+		closePopup();
+	});
 });
 
 $("#members-container").on("click", ".member-edit", function (event) {
 	const memberRef = $(event.currentTarget).data("memberRef");
 	memberRef && openPopup(updateProductPopup(memberRef), "updateMemberPopupLoaded");
+});
+
+$("#members-container").on("click", ".member-delete", function (event) {
+	const memberRef = $(event.currentTarget).data("memberRef");
+	memberRef && openPopup(deleteMemberPopup(memberRef), "deleteMemberPopupLoaded");
 });
 
 function newMemberPopup() {
@@ -185,7 +224,7 @@ function updateMemberPopup(memberRef) {
     <div class="horizontal-container-layout flex-align-center">
         <div class="vertical-layout flex-align-center" style="flex: 1 1 0">
             <h2 class="text-align-center">Edit Member: #${memberRef}</h2>
-            <div id="new-member-error-wrapper" class="wrapper-only" style="align-self: stretch"></div>
+            <div id="update-member-error-wrapper" class="wrapper-only" style="align-self: stretch"></div>
             <form
                 id="update-member-form"
                 class="vertical-layout flex-self-init flex-align-center"
@@ -211,6 +250,25 @@ function updateMemberPopup(memberRef) {
                     <p id="new-member-preview-role">User</p>
                 </div>
             </div>
+        </div>
+    </div>
+    `;
+
+	return final;
+}
+
+function deleteMemberPopup(memberRef) {
+	const final = `
+    <div class="horizontal-container-layout flex-align-center">
+        <div class="vertical-layout flex-align-center" style="flex: 1 1 0">
+            <h2 class="text-align-center">Delete Member: #${memberRef}</h2>
+            <div id="delete-member-error-wrapper" class="wrapper-only" style="align-self: stretch"></div>
+            
+			<h4 style="margin-top: var(--section-gap-vertical); font-weight: 500;" class="text-align-center">Are you sure want to delete this member?</h4>
+			<div class="horizontal-layout flex-align-center" style="margin-top: var(--section-gap-vertical); column-gap: 8px !important;">
+				<button type="button" id="confirm-delete-member" class="button error flex-self-stretch" style="flex: 1 1 0" data-member-ref="${memberRef}">Delete</button>
+				<button type="button" id="cancel-delete-member" class="button flex-self-stretch" style="flex: 1 1 0">Cancel</button>
+			</div>
         </div>
     </div>
     `;

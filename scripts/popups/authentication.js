@@ -22,7 +22,7 @@ function onSignInSubmit(event) {
 		{},
 		{
 			type: "POST",
-			url: "http://localhost:3000/auth",
+			url: `${basePath}/auth`,
 			data: JSON.stringify(final),
 			contentType: "application/json",
 			xhrFields: {
@@ -194,7 +194,7 @@ function signOutUser() {
 		},
 		{
 			type: "DELETE",
-			url: `http://localhost:3000/auth/signout/`,
+			url: `${basePath}/auth/signout/`,
 			success: async function (data) {
 				console.log("Signed out successfully: " + data.message);
 
