@@ -17,19 +17,22 @@ function checkInputValidity(e) {
 
 function defaultInput(
 	name = "",
+	value = "",
 	type = "",
 	placeholder = "",
 	onInput = "",
 	emptyError = "",
 	patternError = "",
-	errorId = ""
+	errorId = "",
+	isOptional = false
 ) {
 	const final = `<input
         name="${name}"
         id="${name}"
         type="${type}"
         placeholder="${placeholder}"
-        required
+		value="${value}"
+        ${isOptional ? "" : "required"}
         oninput='${onInput}(), checkInputValidity(event)'
         oninvalid="checkInputValidity(event)"
         data-empty-error="${emptyError}"
@@ -42,11 +45,13 @@ function defaultInput(
 
 function textLongInput(
 	name = "",
+	value = "",
 	placeholder = "",
 	onInput = "",
 	emptyError = "",
 	patternError = "",
-	errorId = ""
+	errorId = "",
+	isOptional = false
 ) {
 	const final = `<textarea
         name="${name}"
@@ -54,12 +59,12 @@ function textLongInput(
         rows="4"
         cols="50"
         placeholder="${placeholder}"
-        required
+        ${isOptional ? "" : "required"}
         oninput='${onInput}(), checkInputValidity(event)'
         oninvalid="checkInputValidity(event)"
         data-empty-error="${emptyError}"
         data-pattern-error="${patternError}"
-        data-error-id="${errorId}"></textarea>`;
+        data-error-id="${errorId}">${value}</textarea>`;
 
 	return final;
 }
@@ -70,14 +75,15 @@ function filePickerInput(
 	onInput = "",
 	emptyError = "",
 	patternError = "",
-	errorId = ""
+	errorId = "",
+	isOptional = false
 ) {
 	const final = `<input
         name="${name}"
         id="${name}"
         type="file"
         accept="${acceptType}"
-        required
+        ${isOptional ? "" : "required"}
         onchange='${onInput}(this), checkInputValidity(event)'
         oninvalid="checkInputValidity(event)"
         data-empty-error="${emptyError}"
@@ -89,7 +95,8 @@ function filePickerInput(
 }
 
 function inputField(field) {
-	let { label, name, type, placeholder, onInput, emptyError, patternError } = field;
+	let { label, name, value, type, placeholder, onInput, emptyError, patternError, isOptional } =
+		field;
 	const customType = type.includes("_long") ? 1 : type.includes("file_picker") ? 2 : 0;
 
 	const errorId = uuidv4();
@@ -99,7 +106,16 @@ function inputField(field) {
         <label for="${name}">${label}</label>
         ${
 			customType === 1
-				? textLongInput(name, placeholder, onInput, emptyError, patternError, errorId)
+				? textLongInput(
+						name,
+						value,
+						placeholder,
+						onInput,
+						emptyError,
+						patternError,
+						errorId,
+						isOptional ?? false
+				  )
 				: customType === 2
 				? filePickerInput(
 						name,
@@ -107,9 +123,20 @@ function inputField(field) {
 						onInput,
 						emptyError,
 						patternError,
-						errorId
+						errorId,
+						isOptional ?? false
 				  )
-				: defaultInput(name, type, placeholder, onInput, emptyError, patternError, errorId)
+				: defaultInput(
+						name,
+						value,
+						type,
+						placeholder,
+						onInput,
+						emptyError,
+						patternError,
+						errorId,
+						isOptional ?? false
+				  )
 		}
 
         <span id="${errorId}" class="input-field-error hidden" style="color: var(--error-color)">

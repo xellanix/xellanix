@@ -22,10 +22,13 @@ async function onMemberSubmit(event) {
 	event.preventDefault();
 
 	const submitBtn = $(event.target).find("button[type='submit']");
-	submitBtn.prop("disabled", true);
+	const inputs = $("#popup :input");
+	inputs.prop("disabled", true);
 	submitBtn.text("Adding...");
 
 	const final = retrieveFormData(event.target);
+
+	const memberRef = submitBtn.data("memberRef");
 
 	const accessToken = await retrieveUsableToken();
 	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
@@ -63,7 +66,64 @@ async function onMemberSubmit(event) {
 			$("#new-member-error-wrapper").show();
 
 			submitBtn.text("Add This Member");
-			submitBtn.prop("disabled", false);
+			inputs.prop("disabled", false);
+		},
+	});
+
+	return false;
+}
+
+async function onMemberUpdatedSubmit(event) {
+	event.preventDefault();
+
+	const submitBtn = $(event.target).find("button[type='submit']");
+	const inputs = $("#popup :input");
+	inputs.prop("disabled", true);
+	submitBtn.text("Updating...");
+
+	const final = retrieveFormData(event.target);
+	console.log(final);
+
+	const memberRef = submitBtn.data("memberRef");
+
+	const accessToken = await retrieveUsableToken();
+	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+	// Send the "final" data to backend
+	ajaxRequest(headers, {
+		type: "POST",
+		url: `${basePath}/api/2a4bb58c-3fbd-429a-ad26-ced47bae82a7/${memberRef}`,
+		data: final,
+		processData: false,
+		contentType: false,
+		success: async function (data) {
+			// Do something with the response
+			console.log("success: " + data.message);
+			$("#update-member-error-wrapper").find("*").off();
+			$("#update-member-error-wrapper").empty();
+			$("#update-member-error-wrapper").append(
+				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+			);
+			$("#update-member-error-wrapper").show();
+
+			submitBtn.text("Member Updated");
+
+			await delay(2000);
+			location.reload();
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+			$("#update-member-error-wrapper").find("*").off();
+			$("#update-member-error-wrapper").empty();
+			$("#update-member-error-wrapper").append(infoBox("error", errorMessage));
+			$("#update-member-error-wrapper").show();
+
+			submitBtn.text("Update This Member");
+			inputs.prop("disabled", false);
 		},
 	});
 
@@ -79,31 +139,48 @@ $(document).on("updateMemberPopupLoaded", function (event, element) {
 $(document).on("deleteMemberPopupLoaded", function (event, element) {
 	$("#delete-member-error-wrapper").hide();
 
-	$("#confirm-delete-member").on("click", function (e) {
-		const memberRef = $(e.currentTarget).data("memberRef");
-		ajaxRequest(
-			{},
-			{
-				type: "DELETE",
-				url: `${basePath}/api/xxx/${memberRef}`,
-				success: function (data) {
-					// Do something with the response
-					console.log("success: " + data.message);
-					location.reload();
-				},
-				error: function (xhr, status, error) {
-					// Handle error
-					let errorCode = xhr.status;
-					let errorText = xhr.statusText;
-					let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+	$("#confirm-delete-member").on("click", async function (e) {
+		const btn = $(e.currentTarget);
+		const memberRef = btn.data("memberRef");
 
-					$("#delete-member-error-wrapper").find("*").off();
-					$("#delete-member-error-wrapper").empty();
-					$("#delete-member-error-wrapper").append(infoBox("error", errorMessage));
-					$("#delete-member-error-wrapper").show();
-				},
-			}
-		);
+		btn.prop("disabled", true);
+		btn.text("Deleting...");
+
+		const accessToken = await retrieveUsableToken();
+		const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+		ajaxRequest(headers, {
+			type: "GET",
+			url: `${basePath}/api/bd7d187c-0fe5-4887-870c-81aa2b6a4152/${memberRef}`,
+			success: function (data) {
+				// Do something with the response
+				console.log("success: " + data.message);
+				$("#delete-member-error-wrapper").find("*").off();
+				$("#delete-member-error-wrapper").empty();
+				$("#delete-member-error-wrapper").append(
+					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+				);
+				$("#delete-member-error-wrapper").show();
+
+				btn.text("Deleted");
+
+				location.reload();
+			},
+			error: function (xhr, status, error) {
+				// Handle error
+				let errorCode = xhr.status;
+				let errorText = xhr.statusText;
+				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+				$("#delete-member-error-wrapper").find("*").off();
+				$("#delete-member-error-wrapper").empty();
+				$("#delete-member-error-wrapper").append(infoBox("error", errorMessage));
+				$("#delete-member-error-wrapper").show();
+
+				btn.text("Delete");
+				btn.prop("disabled", false);
+			},
+		});
 	});
 
 	$("#cancel-delete-member").on("click", function () {
@@ -111,9 +188,37 @@ $(document).on("deleteMemberPopupLoaded", function (event, element) {
 	});
 });
 
-$("#members-container").on("click", ".member-edit", function (event) {
+$("#members-container").on("click", ".member-edit", async function (event) {
 	const memberRef = $(event.currentTarget).data("memberRef");
-	memberRef && openPopup(updateProductPopup(memberRef), "updateMemberPopupLoaded");
+
+	const accessToken = await retrieveUsableToken();
+	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+	ajaxRequest(headers, {
+		type: "GET",
+		url: `${basePath}/api/9cb41cdb-70fb-4957-984d-d649c39130a1/${memberRef}`,
+		success: async function (data) {
+			// Do something with the response
+			memberRef &&
+				openPopup(
+					updateMemberPopup(
+						memberRef,
+						data.member_name,
+						data.member_role,
+						data.member_photo
+					),
+					"updateMemberPopupLoaded"
+				);
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `Error ${errorCode}: ${errorText}`;
+
+			alert(errorMessage);
+		},
+	});
 });
 
 $("#members-container").on("click", ".member-delete", function (event) {
@@ -189,10 +294,11 @@ function newMemberPopup() {
 	return final;
 }
 
-function updateMemberPopup(memberRef) {
+function updateMemberPopup(memberRef, memberName, memberRole, memberPhoto) {
 	const fields = [
 		{
 			name: "member_name",
+			value: memberName,
 			type: "text",
 			placeholder: "The member name",
 			label: "Name",
@@ -202,6 +308,7 @@ function updateMemberPopup(memberRef) {
 		},
 		{
 			name: "member_role",
+			value: memberRole,
 			type: "text",
 			placeholder: "The member role",
 			label: "Role",
@@ -217,6 +324,7 @@ function updateMemberPopup(memberRef) {
 			onInput: "onMemberImgChange",
 			emptyError: "Enter the image link",
 			patternError: "Image link is invalid",
+			isOptional: true,
 		},
 	];
 
@@ -229,25 +337,26 @@ function updateMemberPopup(memberRef) {
                 id="update-member-form"
                 class="vertical-layout flex-self-init flex-align-center"
                 style="margin-top: var(--section-gap-vertical)"
-                onsubmit="return onMemberSubmit(event)"
+                onsubmit="return onMemberUpdatedSubmit(event)"
             >
                 ${fields.map((field) => inputField(field)).join("")}
                 <button
                     type="submit"
                     class="button accent flex-self-center"
                     style="margin-top: var(--section-gap-vertical)"
+					data-member-ref="${memberRef}"
                 >
-                    Add This Member
+                    Update This Member
                 </button>
             </form>
         </div>
         <div class="vertical-layout flex-align-center" style="position: sticky; top: 0; align-self: flex-start; flex: 0 1 0;">
             <h4 class="text-align-center">Preview</h4>
             <div class="team-member-item text-align-center">
-                <img id="new-member-preview-img" src="assets/member/donny.jpg" alt="Default Name Picture">
+                <img id="new-member-preview-img" src="${memberPhoto}" alt="${memberName} Picture">
                 <div class="vertical-layout">
-                    <h3 id="new-member-preview-name">Default Name</h3>
-                    <p id="new-member-preview-role">User</p>
+                    <h3 id="new-member-preview-name">${memberName}</h3>
+                    <p id="new-member-preview-role">${memberRole}</p>
                 </div>
             </div>
         </div>

@@ -14,7 +14,8 @@ async function onProductSubmit(event) {
 	event.preventDefault();
 
 	const submitBtn = $(event.target).find("button[type='submit']");
-	submitBtn.prop("disabled", true);
+	const inputs = $("#popup :input");
+	inputs.prop("disabled", true);
 	submitBtn.text("Adding...");
 
 	const final = retrieveFormEntries(event.target);
@@ -55,17 +56,64 @@ async function onProductSubmit(event) {
 			$("#new-product-error-wrapper").show();
 
 			submitBtn.text("Add This Product");
-			submitBtn.prop("disabled", false);
+			inputs.prop("disabled", false);
 		},
 	});
 
 	return false;
 }
 
-function onProductUpdatedSubmit(event) {
+async function onProductUpdatedSubmit(event) {
 	event.preventDefault();
 
+	const submitBtn = $(event.target).find("button[type='submit']");
+	const inputs = $("#popup :input");
+	inputs.prop("disabled", true);
+	submitBtn.text("Updating...");
+
 	const final = retrieveFormEntries(event.target);
+
+	const productRef = submitBtn.data("productRef");
+
+	const accessToken = await retrieveUsableToken();
+	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+	// Send the "final" data to backend
+	ajaxRequest(headers, {
+		type: "POST",
+		url: `${basePath}/api/b137a6ba-db3d-4a82-a5c5-d0b33cd2cbf9/${productRef}`,
+		data: JSON.stringify(final),
+		contentType: "application/json",
+		success: async function (data) {
+			// Do something with the response
+			console.log("success: " + data.message);
+			$("#update-product-error-wrapper").find("*").off();
+			$("#update-product-error-wrapper").empty();
+			$("#update-product-error-wrapper").append(
+				infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+			);
+			$("#update-product-error-wrapper").show();
+
+			submitBtn.text("Product Updated");
+
+			await delay(2000);
+			location.reload();
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+			$("#update-product-error-wrapper").find("*").off();
+			$("#update-product-error-wrapper").empty();
+			$("#update-product-error-wrapper").append(infoBox("error", errorMessage));
+			$("#update-product-error-wrapper").show();
+
+			submitBtn.text("Update This Product");
+			inputs.prop("disabled", false);
+		},
+	});
 
 	return false;
 }
@@ -79,31 +127,48 @@ $(document).on("updateProductPopupLoaded", function (event, element) {
 $(document).on("deleteProductPopupLoaded", function (event, element) {
 	$("#delete-product-error-wrapper").hide();
 
-	$("#confirm-delete-product").on("click", function (e) {
-		const productRef = $(e.currentTarget).data("productRef");
-		ajaxRequest(
-			{},
-			{
-				type: "DELETE",
-				url: `${basePath}/api/xxx/${productRef}`,
-				success: function (data) {
-					// Do something with the response
-					console.log("success: " + data.message);
-					location.reload();
-				},
-				error: function (xhr, status, error) {
-					// Handle error
-					let errorCode = xhr.status;
-					let errorText = xhr.statusText;
-					let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+	$("#confirm-delete-product").on("click", async function (e) {
+		const btn = $(e.currentTarget);
+		const productRef = btn.data("productRef");
 
-					$("#delete-product-error-wrapper").find("*").off();
-					$("#delete-product-error-wrapper").empty();
-					$("#delete-product-error-wrapper").append(infoBox("error", errorMessage));
-					$("#delete-product-error-wrapper").show();
-				},
-			}
-		);
+		btn.prop("disabled", true);
+		btn.text("Deleting...");
+
+		const accessToken = await retrieveUsableToken();
+		const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+		ajaxRequest(headers, {
+			type: "GET",
+			url: `${basePath}/api/295c6c91-e2b9-4c53-bc27-0b7bdcf3c517/${productRef}`,
+			success: function (data) {
+				// Do something with the response
+				console.log("success: " + data.message);
+				$("#delete-product-error-wrapper").find("*").off();
+				$("#delete-product-error-wrapper").empty();
+				$("#delete-product-error-wrapper").append(
+					infoBox("success", `<span><strong>Success </strong>: ${data.message}</span>`)
+				);
+				$("#delete-product-error-wrapper").show();
+
+				btn.text("Deleted");
+
+				location.reload();
+			},
+			error: function (xhr, status, error) {
+				// Handle error
+				let errorCode = xhr.status;
+				let errorText = xhr.statusText;
+				let errorMessage = `<span><strong>Error ${errorCode}</strong>: ${errorText}</span>`;
+
+				$("#delete-product-error-wrapper").find("*").off();
+				$("#delete-product-error-wrapper").empty();
+				$("#delete-product-error-wrapper").append(infoBox("error", errorMessage));
+				$("#delete-product-error-wrapper").show();
+
+				btn.text("Delete");
+				btn.prop("disabled", false);
+			},
+		});
 	});
 
 	$("#cancel-delete-product").on("click", function () {
@@ -111,9 +176,37 @@ $(document).on("deleteProductPopupLoaded", function (event, element) {
 	});
 });
 
-$("#products-container").on("click", ".product-item-edit", function (event) {
+$("#products-container").on("click", ".product-item-edit", async function (event) {
 	const productRef = $(event.currentTarget).data("productRef");
-	productRef && openPopup(updateProductPopup(productRef), "updateProductPopupLoaded");
+
+	const accessToken = await retrieveUsableToken();
+	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
+
+	ajaxRequest(headers, {
+		type: "GET",
+		url: `${basePath}/api/9b6c7e7d-9d7f-4c60-80eb-ac24cef7f264/${productRef}`,
+		success: async function (data) {
+			// Do something with the response
+			productRef &&
+				openPopup(
+					updateProductPopup(
+						productRef,
+						data.product_name,
+						data.description,
+						data.learn_link
+					),
+					"updateProductPopupLoaded"
+				);
+		},
+		error: function (xhr, status, error) {
+			// Handle error
+			let errorCode = xhr.status;
+			let errorText = xhr.statusText;
+			let errorMessage = `Error ${errorCode}: ${errorText}`;
+
+			alert(errorMessage);
+		},
+	});
 });
 
 $("#products-container").on("click", ".product-item-delete", function (event) {
@@ -189,10 +282,11 @@ function newProductPopup() {
 	return final;
 }
 
-function updateProductPopup(productRef) {
+function updateProductPopup(productRef, prodName, prodDesc, prodUrl) {
 	const fields = [
 		{
 			name: "prod_name",
+			value: prodName,
 			type: "text",
 			placeholder: "The product name",
 			label: "Name",
@@ -202,6 +296,7 @@ function updateProductPopup(productRef) {
 		},
 		{
 			name: "prod_desc",
+			value: prodDesc,
 			type: "text_long",
 			placeholder: "The product description",
 			label: "Description",
@@ -211,6 +306,7 @@ function updateProductPopup(productRef) {
 		},
 		{
 			name: "prod_url",
+			value: prodUrl,
 			type: "url",
 			placeholder: "https://github.com/xellanix/product",
 			label: "Target Link",
@@ -236,6 +332,7 @@ function updateProductPopup(productRef) {
                     type="submit"
                     class="button accent flex-self-center"
                     style="margin-top: var(--section-gap-vertical)"
+					data-product-ref="${productRef}"
                 >
                     Update This Product
                 </button>
@@ -244,10 +341,10 @@ function updateProductPopup(productRef) {
         <div class="vertical-layout flex-align-center" style="position: sticky; top: 0; align-self: flex-start; flex: 0 1 0;">
             <h4 class="text-align-center">Preview</h4>
             <div class="product-item text-align-center">
-                <h3 id="new-product-preview-name">Default Name</h3>
-                <p id="new-product-preview-description">Description</p>
+                <h3 id="new-product-preview-name">${prodName}</h3>
+                <p id="new-product-preview-description">${prodDesc}</p>
                 <div class="button accent">
-                    <a id="new-product-preview-link" href="/" target="_blank" tabindex="-1">Learn More</a>
+                    <a id="new-product-preview-link" href="${prodUrl}" target="_blank" tabindex="-1">Learn More</a>
                 </div>
             </div>
         </div>
