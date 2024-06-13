@@ -23,12 +23,10 @@ async function onMemberSubmit(event) {
 
 	const submitBtn = $(event.target).find("button[type='submit']");
 	const inputs = $("#popup :input");
-	inputs.prop("disabled", true);
-	submitBtn.text("Adding...");
 
 	const final = retrieveFormData(event.target);
-
-	const memberRef = submitBtn.data("memberRef");
+	submitBtn.text("Adding...");
+	inputs.prop("disabled", true);
 
 	const accessToken = await retrieveUsableToken();
 	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
@@ -78,11 +76,10 @@ async function onMemberUpdatedSubmit(event) {
 
 	const submitBtn = $(event.target).find("button[type='submit']");
 	const inputs = $("#popup :input");
-	inputs.prop("disabled", true);
-	submitBtn.text("Updating...");
 
 	const final = retrieveFormData(event.target);
-	console.log(final);
+	inputs.prop("disabled", true);
+	submitBtn.text("Updating...");
 
 	const memberRef = submitBtn.data("memberRef");
 

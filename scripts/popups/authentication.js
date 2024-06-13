@@ -12,10 +12,12 @@ function onSignInSubmit(event) {
 	event.preventDefault();
 
 	const submitBtn = $(event.target).find("button[type='submit']");
-	submitBtn.prop("disabled", true);
-	submitBtn.text("Signing In...");
+	const inputs = $("#popup :input");
 
 	const final = retrieveFormEntries(event.target);
+
+	inputs.prop("disabled", true);
+	submitBtn.text("Signing In...");
 
 	// Send the "final" data to backend
 	ajaxRequest(
@@ -56,7 +58,7 @@ function onSignInSubmit(event) {
 				$("#user-signin-error-wrapper").show();
 
 				submitBtn.text("Sign In");
-				submitBtn.prop("disabled", false);
+				inputs.prop("disabled", false);
 			},
 		}
 	);

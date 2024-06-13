@@ -15,10 +15,10 @@ async function onProductSubmit(event) {
 
 	const submitBtn = $(event.target).find("button[type='submit']");
 	const inputs = $("#popup :input");
-	inputs.prop("disabled", true);
-	submitBtn.text("Adding...");
 
 	const final = retrieveFormEntries(event.target);
+	inputs.prop("disabled", true);
+	submitBtn.text("Adding...");
 
 	const accessToken = await retrieveUsableToken();
 	const headers = accessToken ? { Authorization: `Bearer ${accessToken}` } : {};
@@ -68,10 +68,10 @@ async function onProductUpdatedSubmit(event) {
 
 	const submitBtn = $(event.target).find("button[type='submit']");
 	const inputs = $("#popup :input");
-	inputs.prop("disabled", true);
-	submitBtn.text("Updating...");
 
 	const final = retrieveFormEntries(event.target);
+	inputs.prop("disabled", true);
+	submitBtn.text("Updating...");
 
 	const productRef = submitBtn.data("productRef");
 
